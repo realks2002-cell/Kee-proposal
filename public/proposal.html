@@ -2602,7 +2602,7 @@ footer {
         <div class="mockup-text">
           <div class="num">04</div>
           <div class="meta">FEATURE — Mobile First + Native App</div>
-          <h3>모바일 우선 + 네이티브 앱</h3>
+          <h3>iOS &amp; 안드로이드 앱</h3>
           <p>iOS/Android 앱을 통해 종친회 행사 알림, 신규 등록 완료 푸시,
             가계도 빠른 조회를 제공합니다. 어르신·청년 모두에게 자연스러운 접근 환경입니다.</p>
           <ul>
@@ -2883,6 +2883,73 @@ footer {
         </div>
       </div>
 
+      <!-- M08 — 월 1회 자동 백업 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">08</div>
+          <div class="meta">FEATURE — Auto Backup</div>
+          <h3>월 1회 자동 백업</h3>
+          <p>매월 1회 DB 전체를 자동 백업하여, 백업 파일을 위원회 대표 이메일로 자동 송부합니다.
+            위원회가 직접 보관하므로 벤더 종속 없이 데이터 영구 확보가 가능합니다.</p>
+          <ul>
+            <li>매월 1일 새벽 자동 백업 (pg_cron 스케줄)</li>
+            <li>위원회 대표 이메일로 자동 송부</li>
+            <li>DB 전체 + 사진·문서 안전 링크 포함</li>
+            <li>벤더 종속 없는 영구 데이터 확보</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+            <div style="background: var(--bg-soft); padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;">✉</div>
+              <div style="flex: 1;">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink);">위원회 대표 메일함</div>
+                <div style="font-size: 10px; color: var(--ink-mute);">backup@hjkee.org</div>
+              </div>
+              <div style="font-family: var(--mono); font-size: 9px; color: var(--ink-dim); letter-spacing: 0.15em;">INBOX</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column;">
+              <div style="padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--accent-bg); border-left: 3px solid var(--accent);">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                  <div style="font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.1em;">[KEE 자동 백업]</div>
+                  <div style="font-size: 10px; color: var(--accent); font-weight: 600;">방금 전</div>
+                </div>
+                <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">2026년 5월 백업 완료 ✓</div>
+                <div style="font-size: 10px; color: var(--ink-mute); line-height: 1.55;">
+                  DB 덤프 (43,127명) · 사진·문서 다운로드 링크 · 변경 로그<br>
+                  <span style="color: var(--accent); font-weight: 600;">↓ 첨부 (12.4 MB)</span>
+                </div>
+              </div>
+
+              <div style="padding: 12px 16px; border-bottom: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                  <div style="font-family: var(--mono); font-size: 9px; color: var(--ink-mute); letter-spacing: 0.1em;">[KEE 자동 백업]</div>
+                  <div style="font-size: 10px; color: var(--ink-mute);">한 달 전</div>
+                </div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 2px;">2026년 4월 백업 완료 ✓</div>
+                <div style="font-size: 10px; color: var(--ink-mute);">DB 덤프 · 12.1 MB</div>
+              </div>
+
+              <div style="padding: 12px 16px; opacity: 0.6;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                  <div style="font-family: var(--mono); font-size: 9px; color: var(--ink-mute); letter-spacing: 0.1em;">[KEE 자동 백업]</div>
+                  <div style="font-size: 10px; color: var(--ink-mute);">두 달 전</div>
+                </div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-soft);">2026년 3월 백업 완료 ✓</div>
+              </div>
+            </div>
+
+            <div style="padding: 12px 16px; background: var(--bg-soft); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
+              <div style="font-size: 12px; color: var(--green); font-weight: 700;">✓</div>
+              <div style="font-size: 10px; color: var(--ink-mute); line-height: 1.5;">
+                매월 1일 새벽 자동 발송 — 위원회가 직접 보관해 데이터 영구 확보
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Phase 2 헤더 -->
@@ -2897,10 +2964,10 @@ footer {
 
     <div class="mockup-section">
 
-      <!-- M08 — AI 조상 발견 -->
+      <!-- M09 — AI 조상 발견 -->
       <div class="mockup-block">
         <div class="mockup-text">
-          <div class="num" style="color: var(--accent);">08</div>
+          <div class="num" style="color: var(--accent);">09</div>
           <div class="meta" style="color: var(--accent);">PHASE 2 — Onboarding</div>
           <h3>AI 조상 발견 · "내 조상은 누구?"</h3>
           <p>청년이 처음 가입했을 때 5분 안에 본인의 가문 정체성을 깨닫게 만드는 진입점입니다.
@@ -2957,10 +3024,10 @@ footer {
         </div>
       </div>
 
-      <!-- M09 — 가문 카드 SNS 공유 -->
+      <!-- M10 — 가문 카드 SNS 공유 -->
       <div class="mockup-block">
         <div class="mockup-text">
-          <div class="num" style="color: var(--accent);">09</div>
+          <div class="num" style="color: var(--accent);">10</div>
           <div class="meta" style="color: var(--accent);">PHASE 2 — Social Share</div>
           <h3>인스타 스타일 가문 카드</h3>
           <p>청년이 본인의 가문 정체성을 친구들에게 자랑할 수 있는 콘텐츠로 변환합니다.
@@ -3017,10 +3084,10 @@ footer {
         </div>
       </div>
 
-      <!-- M10 — 동년배 종친 찾기 -->
+      <!-- M11 — 동년배 종친 찾기 -->
       <div class="mockup-block">
         <div class="mockup-text">
-          <div class="num" style="color: var(--accent);">10</div>
+          <div class="num" style="color: var(--accent);">11</div>
           <div class="meta" style="color: var(--accent);">PHASE 2 — Same Generation</div>
           <h3>동년배 종친 찾기</h3>
           <p>같은 세대(예: 31세)의 종친이 얼마나 살아있는지, 어디에 거주하는지를 보여주어
@@ -3092,10 +3159,10 @@ footer {
         </div>
       </div>
 
-      <!-- M11 — AI 가문 도우미 챗봇 -->
+      <!-- M12 — AI 가문 도우미 챗봇 -->
       <div class="mockup-block">
         <div class="mockup-text">
-          <div class="num" style="color: var(--accent);">11</div>
+          <div class="num" style="color: var(--accent);">12</div>
           <div class="meta" style="color: var(--accent);">PHASE 2 — AI Assistant</div>
           <h3>AI 가문 도우미 챗봇</h3>
           <p>조상 정보·가계도·종친회 절차에 대한 자연어 질문에 즉시 답변하는 AI 챗봇입니다.
@@ -3164,7 +3231,7 @@ footer {
         </div>
       </div>
 
-      <!-- M11 보조: 지원 질문 카테고리 -->
+      <!-- M12 보조: 지원 질문 카테고리 -->
       <div style="margin-top: 8px; padding: 36px 32px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 16px;">
         <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
           <div>
@@ -3245,10 +3312,10 @@ footer {
 
         </div>
       </div>
-      <!-- M12 — 분파 자치 -->
+      <!-- M13 — 분파 자치 -->
       <div class="mockup-block">
         <div class="mockup-text">
-          <div class="num" style="color: var(--accent);">12</div>
+          <div class="num" style="color: var(--accent);">13</div>
           <div class="meta" style="color: var(--accent);">PHASE 2 — Branch Autonomy</div>
           <h3>분파별 자치 운영</h3>
           <p>각 분파별 임원진, 행사 캘린더, 종친 명단이 별도로 관리되며 권한이 분리됩니다.
