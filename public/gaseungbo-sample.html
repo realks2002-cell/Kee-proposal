@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>家乘譜 - 27世 奇成度</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nanum Myeongjo', 'Noto Serif KR', serif;
+  color: #1a1208;
+  background: #f5f0e1;
+  line-height: 1.6;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 25mm 20mm;
+  background:
+    linear-gradient(180deg, rgba(245,240,225,0.95), rgba(248,242,228,0.98)),
+    repeating-linear-gradient(90deg, transparent 0, transparent 4px, rgba(150,100,40,0.015) 4px, rgba(150,100,40,0.015) 5px);
+  page-break-after: always;
+  position: relative;
+  border: 3px double #6b3410;
+  border-image: none;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  top: 8mm;
+  left: 8mm;
+  right: 8mm;
+  bottom: 8mm;
+  border: 1px solid #8b4d1a;
+  pointer-events: none;
+}
+
+.page-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Cover Page ===== */
+.cover {
+  text-align: center;
+  padding: 40mm 0 30mm;
+}
+
+.cover-clan-han {
+  font-size: 22pt;
+  letter-spacing: 1em;
+  color: #6b3410;
+  margin-bottom: 10mm;
+  font-weight: 500;
+}
+
+.cover-title-han {
+  font-size: 72pt;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  color: #4a1f08;
+  margin-bottom: 6mm;
+  line-height: 1;
+}
+
+.cover-title-kor {
+  font-size: 18pt;
+  letter-spacing: 0.5em;
+  color: #6b3410;
+  margin-bottom: 25mm;
+  font-weight: 400;
+}
+
+.cover-divider {
+  width: 60mm;
+  height: 2px;
+  background: #6b3410;
+  margin: 15mm auto;
+  position: relative;
+}
+
+.cover-divider::before,
+.cover-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: #6b3410;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.cover-divider::before { left: -10px; }
+.cover-divider::after { right: -10px; }
+
+.cover-subject-han {
+  font-size: 32pt;
+  letter-spacing: 0.3em;
+  color: #4a1f08;
+  margin-bottom: 4mm;
+  font-weight: 600;
+}
+
+.cover-subject-kor {
+  font-size: 14pt;
+  color: #6b3410;
+  letter-spacing: 0.4em;
+  margin-bottom: 20mm;
+}
+
+.cover-meta {
+  display: inline-block;
+  border: 1px solid #6b3410;
+  padding: 8mm 14mm;
+  margin: 0 auto;
+  background: rgba(255, 250, 235, 0.5);
+}
+
+.cover-meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10mm;
+  margin-bottom: 4mm;
+  font-size: 11pt;
+  color: #4a1f08;
+}
+
+.cover-meta-row:last-child { margin-bottom: 0; }
+
+.cover-meta-label {
+  width: 25mm;
+  font-weight: 700;
+  text-align: right;
+  color: #6b3410;
+}
+
+.cover-meta-value { font-size: 12pt; }
+
+.cover-footer {
+  position: absolute;
+  bottom: 25mm;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10pt;
+  color: #8b4d1a;
+  letter-spacing: 0.3em;
+}
+
+/* ===== Content Pages ===== */
+.section-header {
+  border-top: 2px solid #6b3410;
+  border-bottom: 1px solid #8b4d1a;
+  padding: 4mm 0 3mm;
+  margin: 8mm 0 8mm;
+  text-align: center;
+}
+
+.section-han {
+  font-size: 18pt;
+  letter-spacing: 0.5em;
+  color: #4a1f08;
+  font-weight: 700;
+  margin-bottom: 1mm;
+}
+
+.section-kor {
+  font-size: 11pt;
+  color: #6b3410;
+  letter-spacing: 0.3em;
+}
+
+.preface {
+  font-size: 11pt;
+  line-height: 2;
+  text-align: justify;
+  margin-bottom: 8mm;
+  padding: 0 5mm;
+  color: #2c1808;
+}
+
+.preface .han {
+  letter-spacing: 0.05em;
+  color: #4a1f08;
+  font-weight: 500;
+}
+
+.preface .em {
+  color: #6b3410;
+  font-weight: 700;
+}
+
+/* Lineage entries */
+.lineage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 22mm 1fr;
+  gap: 6mm;
+  padding: 5mm 4mm;
+  border-bottom: 1px dashed #c9a66b;
+  page-break-inside: avoid;
+}
+
+.entry.notable {
+  background: rgba(255, 245, 220, 0.6);
+  border-left: 3px solid #6b3410;
+  padding-left: 6mm;
+}
+
+.entry.subject {
+  background: rgba(255, 235, 210, 0.7);
+  border: 2px solid #6b3410;
+  padding: 6mm;
+  margin-top: 3mm;
+  margin-bottom: 3mm;
+  page-break-inside: avoid;
+}
+
+.entry-gen {
+  text-align: center;
+  border-right: 1px solid #c9a66b;
+  padding-right: 6mm;
+  font-family: 'Nanum Myeongjo', serif;
+}
+
+.entry-gen-num-han {
+  font-size: 22pt;
+  font-weight: 800;
+  color: #4a1f08;
+  line-height: 1;
+}
+
+.entry-gen-num-kor {
+  font-size: 9pt;
+  color: #6b3410;
+  margin-top: 1mm;
+  letter-spacing: 0.1em;
+}
+
+.entry-gen-relation {
+  font-size: 8pt;
+  color: #8b4d1a;
+  margin-top: 2mm;
+  letter-spacing: 0.05em;
+}
+
+.entry-body { padding-left: 0; }
+
+.entry-name-han {
+  font-size: 18pt;
+  font-weight: 700;
+  color: #1a0e04;
+  letter-spacing: 0.15em;
+  margin-bottom: 1mm;
+}
+
+.entry.subject .entry-name-han { font-size: 22pt; }
+
+.entry-name-kor {
+  font-size: 11pt;
+  color: #6b3410;
+  margin-bottom: 3mm;
+  letter-spacing: 0.05em;
+}
+
+.entry-honor {
+  display: inline-block;
+  font-size: 9pt;
+  color: #6b3410;
+  background: rgba(139, 77, 26, 0.1);
+  padding: 1mm 3mm;
+  border-radius: 2mm;
+  margin-bottom: 3mm;
+  font-weight: 600;
+}
+
+.entry-fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5mm 5mm;
+  font-size: 10pt;
+  line-height: 1.7;
+}
+
+.entry-fields .label {
+  color: #8b4d1a;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+}
+
+.entry-fields .value { color: #2c1808; }
+
+.entry-fields .value .han {
+  letter-spacing: 0.05em;
+  color: #1a0e04;
+}
+
+.entry-fields .value .kor {
+  font-size: 9pt;
+  color: #6b3410;
+  margin-left: 3mm;
+}
+
+.summary-note {
+  font-size: 9pt;
+  color: #8b4d1a;
+  font-style: italic;
+  text-align: center;
+  padding: 4mm;
+  background: rgba(245, 230, 195, 0.5);
+  margin: 4mm 0;
+  letter-spacing: 0.05em;
+}
+
+.original-text {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 11pt;
+  line-height: 2;
+  letter-spacing: 0.15em;
+  color: #1a0e04;
+  background: rgba(255, 250, 235, 0.6);
+  padding: 5mm;
+  border-left: 3px solid #6b3410;
+  margin: 3mm 0;
+  text-align: justify;
+}
+
+.original-trans {
+  font-size: 10pt;
+  line-height: 1.8;
+  color: #4a1f08;
+  padding: 3mm 5mm;
+  margin-bottom: 3mm;
+  border-left: 1px dashed #c9a66b;
+}
+
+/* Footer */
+.page-footer {
+  position: absolute;
+  bottom: 12mm;
+  left: 25mm;
+  right: 25mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9pt;
+  color: #8b4d1a;
+  letter-spacing: 0.15em;
+  padding-top: 3mm;
+  border-top: 1px solid #c9a66b;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== 표지 ===== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="cover">
+      <div class="cover-clan-han">幸 州 奇 氏</div>
+      <div class="cover-title-han">家 乘 譜</div>
+      <div class="cover-title-kor">가 승 보</div>
+
+      <div class="cover-divider"></div>
+
+      <div class="cover-subject-han">政 務 公 派</div>
+      <div class="cover-subject-kor">정 무 공 파</div>
+
+      <div class="cover-divider"></div>
+
+      <div class="cover-meta">
+        <div class="cover-meta-row">
+          <span class="cover-meta-label">代상</span>
+          <span class="cover-meta-value">二十七世 奇成度 (27세 기성도)</span>
+        </div>
+        <div class="cover-meta-row">
+          <span class="cover-meta-label">分派</span>
+          <span class="cover-meta-value">郎將公 系統 (낭장공 계통)</span>
+        </div>
+        <div class="cover-meta-row">
+          <span class="cover-meta-label">發行</span>
+          <span class="cover-meta-value">二〇二六年 五月 (2026년 5월)</span>
+        </div>
+      </div>
+
+      <div class="cover-footer">行州奇氏大宗中 · 행주기씨대종중</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 序文 + 始祖 ===== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-header">
+      <div class="section-han">序 文</div>
+      <div class="section-kor">서 문</div>
+    </div>
+
+    <div class="preface">
+      <span class="em">家乘譜</span> 는
+      <span class="han">幸州 奇氏 政務公派 27世 奇成度</span> 의 직계 가지를 정리한 약식 족보이다.
+      <span class="han">始祖 諱 友誠 (시조 휘 우성)</span>으로부터 본인에 이르기까지
+      27세에 걸친 직계 조상의 諱(휘)·字(자)·號(호)·官職(관직)·墓所(묘소)를 한문 원문과 한글 번역으로 병기하였다.
+      <br><br>
+      특히 <span class="em">19世 政務公 諱 虔 (정무공 휘 건)</span>께서 청백리에 녹선되시고
+      대사헌·영의정을 지내신 사적은 가문의 큰 자랑이며,
+      이 가승보를 통하여 후손들이 조상의 얼을 잊지 않고 가문의 예의범절을 이어가기를 바란다.
+    </div>
+
+    <div class="section-header">
+      <div class="section-han">直 系 系 譜</div>
+      <div class="section-kor">직 계 계 보</div>
+    </div>
+
+    <div class="lineage-list">
+
+      <div class="entry notable">
+        <div class="entry-gen">
+          <div class="entry-gen-num-han">一世</div>
+          <div class="entry-gen-num-kor">1세</div>
+          <div class="entry-gen-relation">始祖<br>시조</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-name-han">奇 友 誠</div>
+          <div class="entry-name-kor">기우성 · 諱 友誠</div>
+          <div class="entry-honor">行州奇氏 始祖 · 행주기씨 시조</div>
+          <div class="entry-fields">
+            <span class="label">本貫</span><span class="value"><span class="han">幸州 奇氏</span><span class="kor">행주 기씨</span></span>
+            <span class="label">時代</span><span class="value">高麗 中期 (고려 중기)</span>
+            <span class="label">官職</span><span class="value"><span class="han">門下侍中</span><span class="kor">문하시중</span></span>
+            <span class="label">墓所</span><span class="value">京畿道 高陽市 行州 (경기도 고양시 행주)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-note">2世부터 18世까지 17대에 걸친 직계 계보 — 본 샘플에서는 약식 표기 (실제 가승보에선 전 세대 상세 기록)</div>
+
+      <div class="entry notable">
+        <div class="entry-gen">
+          <div class="entry-gen-num-han">十九世</div>
+          <div class="entry-gen-num-kor">19세</div>
+          <div class="entry-gen-relation">9代祖<br>9대조부</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-name-han">奇 虔</div>
+          <div class="entry-name-kor">기건 · 諱 虔</div>
+          <div class="entry-honor">政務公 · 정무공 · 政務公派 始祖</div>
+          <div class="entry-fields">
+            <span class="label">字</span><span class="value"><span class="han">仲剛</span><span class="kor">중강</span></span>
+            <span class="label">號</span><span class="value"><span class="han">靑坡</span><span class="kor">청파</span></span>
+            <span class="label">諡號</span><span class="value"><span class="han">政務</span><span class="kor">정무</span></span>
+            <span class="label">生年</span><span class="value">一三九〇年 (1390년 庚午)</span>
+            <span class="label">卒年</span><span class="value">一四六〇年 (1460년 庚辰) 享年 七十一</span>
+            <span class="label">官職</span><span class="value"><span class="han">大司憲 · 領議政</span><span class="kor">대사헌 · 영의정</span></span>
+            <span class="label">業績</span><span class="value">淸白吏에 錄選 (청백리에 녹선)</span>
+            <span class="label">配位</span><span class="value">貞夫人 全州 李氏 (정부인 전주 이씨)</span>
+            <span class="label">墓所</span><span class="value">京畿道 楊州郡 (경기도 양주군)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>行州奇氏 家乘譜</span>
+      <span>27世 奇成度</span>
+      <span>1 / 3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 父祖, 본인 ===== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-header">
+      <div class="section-han">直 系 (續)</div>
+      <div class="section-kor">직 계 (계속)</div>
+    </div>
+
+    <div class="lineage-list">
+
+      <div class="summary-note">20世부터 24世까지 5代는 약식 표기 (실제 가승보에선 부친·조부 라인 전 세대 상세 기록)</div>
+
+      <div class="entry">
+        <div class="entry-gen">
+          <div class="entry-gen-num-han">二十五世</div>
+          <div class="entry-gen-num-kor">25세</div>
+          <div class="entry-gen-relation">祖父<br>조부</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-name-han">奇 春 衍</div>
+          <div class="entry-name-kor">기춘연 · 諱 春衍</div>
+          <div class="entry-fields">
+            <span class="label">字</span><span class="value"><span class="han">明甫</span><span class="kor">명보</span></span>
+            <span class="label">生年</span><span class="value">一九一二年 (1912년 壬子)</span>
+            <span class="label">卒年</span><span class="value">一九八九年 (1989년 己巳)</span>
+            <span class="label">配位</span><span class="value">淸風 金氏 (청풍 김씨)</span>
+            <span class="label">墓所</span><span class="value">忠淸南道 公州市 先山 (충청남도 공주시 선산)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-gen">
+          <div class="entry-gen-num-han">二十六世</div>
+          <div class="entry-gen-num-kor">26세</div>
+          <div class="entry-gen-relation">父親<br>부친</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-name-han">奇 宇 鳳</div>
+          <div class="entry-name-kor">기우봉 · 諱 宇鳳</div>
+          <div class="entry-fields">
+            <span class="label">字</span><span class="value"><span class="han">秀才</span><span class="kor">수재</span></span>
+            <span class="label">生年</span><span class="value">一九三五年 (1935년 乙亥) 三月 二十日</span>
+            <span class="label">配位</span><span class="value">慶州 崔氏 諱 順德 (경주 최씨 휘 순덕)</span>
+            <span class="label">居住</span><span class="value">서울特別市 城北區 (서울특별시 성북구)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 본인 -->
+      <div class="entry subject">
+        <div class="entry-gen">
+          <div class="entry-gen-num-han">二十七世</div>
+          <div class="entry-gen-num-kor">27세</div>
+          <div class="entry-gen-relation">本人<br>본인</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-name-han">奇 成 度</div>
+          <div class="entry-name-kor">기성도 · 諱 成度</div>
+          <div class="entry-honor">政務公派 郎將公 系統</div>
+          <div class="entry-fields">
+            <span class="label">字</span><span class="value"><span class="han">成道</span><span class="kor">성도</span></span>
+            <span class="label">生年</span><span class="value">一九六二年 壬寅 六月 十二日 生 不單<br>(1962년 임인년 6월 12일생)</span>
+            <span class="label">世系</span><span class="value">27세 · 政務公派 · 郎將公 系統</span>
+            <span class="label">本貫</span><span class="value"><span class="han">幸州 奇氏</span><span class="kor">행주 기씨</span></span>
+          </div>
+
+          <div style="margin-top: 5mm;">
+            <div style="font-size: 9pt; color: #8b4d1a; letter-spacing: 0.15em; margin-bottom: 2mm; font-weight: 600;">原文 · 원문</div>
+            <div class="original-text">字成度 一九六二年 壬寅 六月 十二日 生 不單</div>
+            <div style="font-size: 9pt; color: #8b4d1a; letter-spacing: 0.15em; margin-bottom: 2mm; font-weight: 600;">飜譯 · 번역</div>
+            <div class="original-trans">자(字)는 성도(成道). 1962년 임인년 6월 12일에 태어남. 한 줄기로 잇지 않다(부속이 없음).</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>行州奇氏 家乘譜</span>
+      <span>27世 奇成度</span>
+      <span>2 / 3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 後記 ===== -->
+<div class="page">
+  <div class="page-inner">
+    <div class="section-header">
+      <div class="section-han">後 記</div>
+      <div class="section-kor">후 기</div>
+    </div>
+
+    <div class="preface">
+      이 가승보는 <span class="em">행주기씨대종중 통합 시스템</span>에서 자동 생성된 자료로,
+      <span class="han">幸州 奇氏 政務公派</span>의 직계 계보 데이터베이스를 바탕으로
+      <span class="em">27世 奇成度</span>의 직계 가지만을 발췌하여 정리한 것이다.
+      <br><br>
+      <span class="em">시조부터 본인까지 27세에 걸친 직계 27인</span>의
+      諱(휘)·字(자)·號(호)·시기·관직·묘소·배위 정보를 통합한 본 자료는
+      가족 행사·혼사·회갑·자녀 교육 등에 사용되며,
+      청년 세대가 가문의 정체성을 재발견하는 도구가 되기를 바란다.
+      <br><br>
+      한문 원문은 종친회 보유 족보를 그대로 인용하였고,
+      한글 번역은 표준 족보 용어 사전에 근거하여 자동 생성하였다.
+      특수 용어는 한문 학자 검수를 거쳤다.
+    </div>
+
+    <div style="margin-top: 12mm; padding: 6mm; border: 1px solid #6b3410; background: rgba(255, 250, 235, 0.6);">
+      <div style="font-size: 11pt; color: #4a1f08; line-height: 2;">
+        <strong style="color: #6b3410; letter-spacing: 0.2em;">발행 정보 · 發行 情報</strong>
+        <br><br>
+        본관(本貫): 幸州 奇氏 (행주 기씨)<br>
+        분파(分派): 政務公派 郎將公 系統 (정무공파 낭장공 계통)<br>
+        대상(對象): 27世 奇成度 (二十七世 기성도)<br>
+        직계(直系): 始祖 友誠 → ··· → 19世 政務公 虔 → ··· → 27世 成度<br>
+        총 세대수: 27世<br>
+        발행일(發行日): 二〇二六年 五月 (2026년 5월)<br>
+        발행처(發行處): 행주기씨대종중 (行州奇氏大宗中)<br>
+        시스템: 행주기씨대종중 통합 시스템 v1.0
+      </div>
+    </div>
+
+    <div style="margin-top: 30mm; text-align: center; color: #6b3410; font-size: 11pt; letter-spacing: 0.5em;">
+      ─ 終 ─
+    </div>
+    <div style="text-align: center; color: #8b4d1a; font-size: 9pt; margin-top: 3mm; letter-spacing: 0.3em;">
+      끝
+    </div>
+
+    <div class="page-footer">
+      <span>行州奇氏 家乘譜</span>
+      <span>27世 奇成度</span>
+      <span>3 / 3</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
