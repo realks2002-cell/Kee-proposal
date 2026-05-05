@@ -1,0 +1,3573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>행주기씨대종중 통합 시스템 구축 제안서 | Bizstart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #fafaf9;
+  --bg-card: #ffffff;
+  --bg-elevated: #f5f5f4;
+  --border: #e7e5e4;
+  --border-strong: #d6d3d1;
+  --ink: #0c0a09;
+  --ink-soft: #292524;
+  --ink-mute: #57534e;
+  --ink-dim: #78716c;
+  --accent: #7c2d12;       /* deep maroon - 격조 */
+  --accent-soft: #9a3412;
+  --accent-bg: #fef7f5;
+  --gold: #a16207;
+  --green: #166534;
+  --blue: #1e40af;
+  --serif: 'Instrument Serif', serif;
+  --sans: 'Pretendard', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 15px;
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: white; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.container-narrow {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  네비게이션                            */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+nav.topnav {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.nav-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  표지                                   */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+section.cover {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 80px 0;
+  background:
+    radial-gradient(ellipse at top right, rgba(124, 45, 18, 0.04), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(161, 98, 7, 0.03), transparent 50%);
+}
+
+.cover-content {
+  width: 100%;
+}
+
+.cover-mark {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cover-mark::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.cover-title {
+  font-size: clamp(29px, 4.2vw, 58px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+
+.cover-title .han {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.cover-subtitle {
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  font-weight: 400;
+  max-width: 720px;
+  margin-bottom: 64px;
+  letter-spacing: -0.01em;
+}
+
+.cover-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+  max-width: 880px;
+}
+
+.meta-block {
+  border-right: 1px solid var(--border);
+  padding-right: 24px;
+}
+
+.meta-block:last-child { border-right: none; }
+
+.meta-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+}
+
+.meta-value {
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  공통 섹션                              */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+section {
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-num::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--ink);
+  max-width: 800px;
+}
+
+.section-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.section-lead {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  현황 분석                              */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 80px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 32px 28px;
+  position: relative;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 12px;
+}
+
+.stat-value {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.stat-unit {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink-mute);
+  margin-left: 4px;
+}
+
+.stat-desc {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+}
+
+.stat-trend {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+}
+
+/* 분파 트리 시각화 */
+.branch-section {
+  background: var(--bg-soft);
+  padding: 48px;
+  border: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+.branch-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.branch-title::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  background: var(--accent);
+}
+
+.branch-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.branch-row {
+  display: grid;
+  grid-template-columns: 240px 1fr 80px 100px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 20px;
+  background: white;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.branch-row:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.branch-row.level-1 { padding-left: 20px; font-weight: 600; }
+.branch-row.level-2 { padding-left: 48px; font-size: 13px; }
+.branch-row.level-3 { padding-left: 76px; font-size: 13px; color: var(--ink-mute); }
+
+.branch-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.branch-name .han {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 12px;
+}
+
+.branch-bar {
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.branch-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--accent), var(--accent-soft));
+  border-radius: 3px;
+}
+
+.branch-count {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-mute);
+  text-align: right;
+}
+
+.branch-pct {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  현 시스템 한계                         */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.problem-item {
+  background: white;
+  padding: 36px 32px;
+  position: relative;
+}
+
+.problem-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.problem-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.problem-desc {
+  font-size: 14px;
+  color: var(--ink-mute);
+  line-height: 1.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  비교 비포-애프터                       */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: stretch;
+  margin-top: 48px;
+}
+
+.comp-card {
+  padding: 36px 32px;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.comp-card.before {
+  background: var(--bg-soft);
+  color: var(--ink-mute);
+}
+
+.comp-card.after {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, white, var(--accent-bg));
+  position: relative;
+}
+
+.comp-card.after::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 3px;
+  background: var(--accent);
+}
+
+.comp-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--ink-dim);
+}
+
+.comp-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 16px;
+}
+
+.comp-card.after .comp-label { color: var(--accent); }
+
+.comp-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.comp-list {
+  list-style: none;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.comp-list li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.comp-card.before .comp-list li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: var(--ink-dim);
+  font-weight: 600;
+}
+
+.comp-card.after .comp-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  핵심 기능                              */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: 60px 1fr 200px;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+  transition: background 0.2s;
+}
+
+.feature:hover {
+  background: var(--bg-soft);
+}
+
+.feature-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 32px;
+  color: var(--accent);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.feature-content h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.feature-content p {
+  font-size: 15px;
+  color: var(--ink-mute);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.feature-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-dim);
+  text-align: right;
+  padding-top: 8px;
+}
+
+.feature-tag .new {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  세대 격차 위기                          */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+section.crisis {
+  background: var(--ink);
+  color: white;
+  padding: 140px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: none;
+}
+
+section.crisis::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top right, rgba(124, 45, 18, 0.4), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(161, 98, 7, 0.15), transparent 50%);
+  pointer-events: none;
+}
+
+.crisis .section-num {
+  color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.crisis .section-num::before { background: rgba(255, 255, 255, 0.4); }
+
+.crisis-title {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+  color: white;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.crisis-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: #f97316;
+}
+
+.crisis-lead {
+  font-size: 19px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 760px;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.crisis-data {
+  position: relative;
+  z-index: 2;
+}
+
+.gen-decline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 48px;
+}
+
+.gen-cell {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 28px 20px;
+  position: relative;
+  text-align: center;
+}
+
+.gen-cell.danger {
+  background: linear-gradient(180deg, rgba(220, 38, 38, 0.15), rgba(220, 38, 38, 0.05));
+}
+
+.gen-cell.critical {
+  background: linear-gradient(180deg, rgba(220, 38, 38, 0.4), rgba(220, 38, 38, 0.1));
+}
+
+.gen-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.gen-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.gen-cell.danger .gen-value { color: #fbbf24; }
+.gen-cell.critical .gen-value { color: #f87171; }
+
+.gen-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 6px;
+}
+
+.gen-bar-wrap {
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.gen-bar {
+  width: 100%;
+  max-width: 60px;
+  background: linear-gradient(to top, #7c2d12, rgba(124, 45, 18, 0.4));
+  border-radius: 2px 2px 0 0;
+}
+
+.gen-cell.danger .gen-bar {
+  background: linear-gradient(to top, #d97706, rgba(217, 119, 6, 0.4));
+}
+
+.gen-cell.critical .gen-bar {
+  background: linear-gradient(to top, #dc2626, rgba(220, 38, 38, 0.4));
+}
+
+.crisis-message {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.crisis-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1.5;
+  color: white;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.crisis-quote::before {
+  content: '"';
+  font-size: 48px;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.crisis-msg {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.crisis-msg strong {
+  color: white;
+  font-weight: 600;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  기능 목업                              */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.mockup-section {
+  margin-top: 80px;
+}
+
+.mockup-block {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 64px;
+  align-items: center;
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+
+.mockup-block:nth-child(even) {
+  grid-template-columns: 1.2fr 1fr;
+}
+
+.mockup-block:nth-child(even) .mockup-text {
+  order: 2;
+}
+
+.mockup-block:nth-child(even) .mockup-visual {
+  order: 1;
+}
+
+.mockup-text .num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 56px;
+  color: var(--accent);
+  line-height: 1;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.mockup-text .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 12px;
+}
+
+.mockup-text h3 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.mockup-text p {
+  font-size: 15px;
+  color: var(--ink-mute);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.mockup-text ul {
+  list-style: none;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.mockup-text ul li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  border-bottom: 1px dashed var(--border);
+}
+
+.mockup-text ul li:last-child { border-bottom: none; }
+
+.mockup-text ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* 목업 비주얼 공통 */
+.mockup-visual {
+  position: relative;
+}
+
+.mockup-screen {
+  background: white;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.03),
+    0 8px 24px rgba(12,10,9,0.08),
+    0 24px 48px rgba(12,10,9,0.06);
+}
+
+.mockup-bar {
+  background: var(--bg-elevated);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e7e5e4;
+}
+
+.mockup-dot.r { background: #ff5f57; }
+.mockup-dot.y { background: #febc2e; }
+.mockup-dot.g { background: #28c840; }
+
+.mockup-url {
+  flex: 1;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  margin-left: 8px;
+}
+
+.mockup-body {
+  padding: 24px;
+  background: white;
+  min-height: 380px;
+}
+
+/* 모바일 목업 */
+.phone-mockup {
+  background: var(--ink);
+  border-radius: 32px;
+  padding: 12px;
+  width: 280px;
+  margin: 0 auto;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.05),
+    0 12px 32px rgba(12,10,9,0.12),
+    0 32px 64px rgba(12,10,9,0.08);
+}
+
+.phone-screen {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 540px;
+  position: relative;
+}
+
+.phone-notch {
+  background: var(--ink);
+  width: 100px;
+  height: 18px;
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.phone-status {
+  padding: 12px 20px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.phone-content {
+  padding: 16px;
+  height: calc(100% - 36px);
+  overflow: hidden;
+}
+
+/* M01 — 가계도 시각화 */
+.tree-mock {
+  font-family: var(--sans);
+}
+
+.tree-mock svg {
+  width: 100%;
+  height: auto;
+}
+
+.tree-node {
+  fill: white;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.tree-node.self {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.tree-node.adopted {
+  fill: #fef3c7;
+  stroke: var(--gold);
+}
+
+.tree-line {
+  stroke: var(--ink-dim);
+  stroke-width: 1;
+  fill: none;
+}
+
+.tree-line.adoption {
+  stroke: var(--gold);
+  stroke-dasharray: 3 3;
+}
+
+.tree-text {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  fill: var(--ink);
+}
+
+.tree-text.self { fill: white; font-weight: 600; }
+
+.tree-gen {
+  font-family: var(--mono);
+  font-size: 8px;
+  fill: var(--ink-dim);
+  letter-spacing: 0.05em;
+}
+
+/* M02 — Sankey */
+.sankey-mock {
+  font-family: var(--sans);
+}
+
+.sankey-bar {
+  stroke: white;
+  stroke-width: 0.5;
+}
+
+.sankey-flow {
+  fill: var(--accent);
+  fill-opacity: 0.18;
+}
+
+.sankey-text {
+  font-family: var(--sans);
+  font-size: 9px;
+  fill: var(--ink);
+}
+
+.sankey-num {
+  font-family: var(--mono);
+  font-size: 8px;
+  fill: var(--ink-dim);
+}
+
+/* M03 — 항렬자 추천 */
+.hangryeol-mock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hangryeol-card {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.hangryeol-cap {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.hangryeol-result {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.hangryeol-result .han-big {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 36px;
+  color: var(--accent);
+  margin: 0 4px;
+}
+
+.hangryeol-input {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hangryeol-input .label {
+  color: var(--ink-dim);
+  font-size: 11px;
+  font-family: var(--mono);
+  width: 60px;
+}
+
+.hangryeol-input .val {
+  flex: 1;
+  font-weight: 500;
+}
+
+.hanja-options {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.hanja-chip {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--serif);
+  font-size: 18px;
+  background: white;
+  cursor: pointer;
+}
+
+.hanja-chip.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* M04 — 모바일 가계도 */
+.mobile-tree {
+  background: linear-gradient(180deg, #fafaf9, white);
+  height: 100%;
+  padding: 16px;
+}
+
+.mt-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.mt-gen {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  margin-bottom: 4px;
+}
+
+.mt-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.mt-han {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.mt-meta {
+  font-size: 10px;
+  color: var(--ink-dim);
+  margin-top: 4px;
+}
+
+.mt-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mt-card.up {
+  background: var(--bg-soft);
+  font-size: 11px;
+}
+
+.mt-card.self {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+  flex-direction: column;
+  text-align: center;
+  padding: 18px;
+}
+
+.mt-card.self .mt-name { color: white; font-size: 20px; }
+.mt-card.self .mt-han { color: rgba(255,255,255,0.7); }
+.mt-card.self .mt-meta { color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+.mt-card .arrow {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.mt-card .info {
+  flex: 1;
+}
+
+.mt-card .info .ko {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.mt-card .info .h {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-dim);
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+.mt-swipe {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+
+/* M05 — 위원회 대시보드 */
+.dash-mock {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dash-tile {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.dash-tile.alert {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.dash-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 6px;
+}
+
+.dash-value {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.dash-tile.alert .dash-value { color: var(--accent); }
+
+.dash-table {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dash-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 60px;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 11px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.dash-row.head {
+  background: var(--bg-elevated);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.dash-row:last-child { border-bottom: none; }
+
+.dash-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+}
+
+.dash-status.pending { background: #fef3c7; color: #854d0e; }
+.dash-status.matched { background: #dcfce7; color: #166534; }
+.dash-status.review { background: #dbeafe; color: #1e40af; }
+
+.dash-action {
+  font-size: 10px;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* M06 — 검색 */
+.search-mock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-bar {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar .icon {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--ink-mute);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.search-bar .icon::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--ink-mute);
+  transform: rotate(45deg);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  font-weight: 500;
+}
+
+.search-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.search-chip {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  background: white;
+  color: var(--ink-mute);
+}
+
+.search-chip.active {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+
+.search-result {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr 60px 60px 80px;
+  gap: 8px;
+  font-size: 12px;
+  align-items: center;
+}
+
+.search-result.highlight {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.search-result .name {
+  font-weight: 600;
+}
+
+.search-result .name .h {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+.search-result .meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-dim);
+}
+
+/* M07 — 분파 자치 */
+.branch-mock-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.branch-card-mock {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.branch-card-mock.featured {
+  background: linear-gradient(180deg, white, var(--accent-bg));
+  border-color: var(--accent);
+}
+
+.branch-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.branch-card-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.branch-card-han {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+.branch-card-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-dim);
+}
+
+.branch-card-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.branch-card-meta div {
+  font-size: 10px;
+  color: var(--ink-mute);
+}
+
+.branch-card-meta div .v {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-top: 2px;
+}
+
+.branch-card-events {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--ink-mute);
+}
+
+.branch-card-events .ev {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* M08 — 가승보 PDF */
+.pdf-mock {
+  background: linear-gradient(135deg, #faf8f3, #f5f1e8);
+  border: 1px solid var(--gold);
+  padding: 24px;
+  border-radius: 4px;
+  position: relative;
+  font-family: var(--serif);
+}
+
+.pdf-mock::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(161, 98, 7, 0.3);
+  pointer-events: none;
+}
+
+.pdf-mock-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+.pdf-mock-han {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.pdf-mock-line {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+}
+
+.pdf-mock-content {
+  font-family: var(--sans);
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.pdf-mock-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dotted rgba(161, 98, 7, 0.3);
+}
+
+.pdf-mock-row .l {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pdf-mock-original {
+  background: rgba(255,255,255,0.6);
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 2px;
+  font-family: var(--serif);
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+.pdf-mock-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.pdf-mock-btn {
+  flex: 1;
+  background: var(--ink);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 11px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.pdf-mock-btn.outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  타임라인                               */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.timeline-wrap {
+  margin-top: 64px;
+}
+
+.timeline-track {
+  position: relative;
+  padding-left: 40px;
+  border-left: 1px solid var(--border);
+}
+
+.tl-week {
+  position: relative;
+  padding-bottom: 48px;
+}
+
+.tl-week::before {
+  content: '';
+  position: absolute;
+  left: -45px;
+  top: 8px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--accent);
+  background: white;
+  border-radius: 50%;
+}
+
+.tl-week.milestone::before {
+  background: var(--accent);
+  width: 13px;
+  height: 13px;
+  left: -46px;
+  top: 7px;
+}
+
+.tl-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tl-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.tl-desc {
+  font-size: 14px;
+  color: var(--ink-mute);
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+.tl-week.milestone .tl-title {
+  color: var(--accent);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  견적                                   */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.quote-section {
+  background: var(--bg-soft);
+}
+
+.quote-table {
+  background: white;
+  border: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+.quote-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 100px 140px;
+  gap: 24px;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  font-size: 14px;
+}
+
+.quote-row:last-child { border-bottom: none; }
+
+.quote-row.header {
+  background: var(--bg-elevated);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  padding: 14px 32px;
+}
+
+.quote-row.total {
+  background: var(--ink);
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 24px 32px;
+}
+
+.quote-row.total .quote-amount {
+  font-size: 22px;
+  color: white;
+}
+
+.quote-num {
+  font-family: var(--mono);
+  color: var(--ink-dim);
+  font-size: 12px;
+}
+
+.quote-name {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.quote-name .desc {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+.quote-weeks {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-mute);
+  text-align: right;
+}
+
+.quote-amount {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+}
+
+.quote-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+.qsum-card {
+  background: white;
+  padding: 28px;
+}
+
+.qsum-card.highlight {
+  background: var(--ink);
+  color: white;
+}
+
+.qsum-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+}
+
+.qsum-card.highlight .qsum-label { color: rgba(255,255,255,0.6); }
+
+.qsum-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.qsum-unit {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-mute);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.qsum-card.highlight .qsum-unit { color: rgba(255,255,255,0.6); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  보장사항                               */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.guarantee-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.guarantee-card {
+  padding: 36px 32px;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.g-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.g-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.g-desc {
+  font-size: 14px;
+  color: var(--ink-mute);
+  line-height: 1.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  개발사 소개                            */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.stack-tag {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 13px;
+  color: var(--ink);
+  font-family: var(--mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stack-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.about-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.about-content p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  CTA / 푸터                             */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+section.cta {
+  background: var(--ink);
+  color: white;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+section.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top right, rgba(124, 45, 18, 0.3), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(161, 98, 7, 0.15), transparent 50%);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.cta-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.cta-title {
+  font-size: clamp(24px, 3.6vw, 43px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+}
+
+.cta-desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto 64px;
+  line-height: 1.6;
+}
+
+.cta-contact {
+  display: inline-grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.cta-contact-item {
+  padding: 24px 36px;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  text-align: left;
+}
+
+.cta-contact-item:last-child { border-right: none; }
+
+.cta-cl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.cta-cv {
+  font-size: 15px;
+  color: white;
+  font-weight: 500;
+}
+
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  padding: 32px 0;
+  font-size: 12px;
+  text-align: center;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/*  반응형                                 */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (max-width: 900px) {
+  .container, .container-narrow { padding: 0 24px; }
+  section { padding: 80px 0; }
+  .stats-grid, .problem-grid { grid-template-columns: 1fr 1fr; }
+  .cover-meta-grid { grid-template-columns: 1fr 1fr; gap: 0; }
+  .meta-block:nth-child(2) { border-right: none; }
+  .meta-block { padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .comparison { grid-template-columns: 1fr; }
+  .comp-arrow { transform: rotate(90deg); padding: 12px 0; }
+  .feature { grid-template-columns: 40px 1fr; }
+  .feature-tag { grid-column: 1 / -1; padding-left: 56px; text-align: left; }
+  .quote-row { grid-template-columns: 1fr 80px; gap: 12px; }
+  .quote-row .quote-num, .quote-row.header > div:first-child, .quote-row.header > div:nth-child(3) { display: none; }
+  .quote-row .quote-weeks { grid-column: 1 / -1; padding-top: 4px; text-align: left; }
+  .quote-summary { grid-template-columns: 1fr; }
+  .guarantee-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .branch-row { grid-template-columns: 140px 1fr 60px 60px; gap: 8px; padding: 12px 16px; font-size: 12px; }
+  .cta-contact { display: flex; flex-direction: column; }
+  .cta-contact-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  .cta-contact-item:last-child { border-bottom: none; }
+
+  /* 목업 반응형 */
+  .mockup-block { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+  .mockup-block:nth-child(even) { grid-template-columns: 1fr; }
+  .mockup-block:nth-child(even) .mockup-text { order: 1; }
+  .mockup-block:nth-child(even) .mockup-visual { order: 2; }
+  .mockup-text h3 { font-size: 24px; }
+  .mockup-text .num { font-size: 40px; }
+  .phone-mockup { width: 240px; }
+  .phone-screen { height: 460px; }
+  .branch-mock-grid { grid-template-columns: 1fr; }
+  .dash-mock { grid-template-columns: 1fr 1fr; }
+  .dash-row { grid-template-columns: 1fr 60px 50px; font-size: 10px; padding: 8px 10px; }
+  .dash-row > div:nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">Bizstart</div>
+  <div class="nav-meta">PROPOSAL · 2026.05</div>
+</nav>
+
+<!-- ═════════════════════════════════════ -->
+<!-- 표지                                    -->
+<!-- ═════════════════════════════════════ -->
+<section class="cover">
+  <div class="container">
+    <div class="cover-content">
+      <div class="cover-mark">행주기씨대종중 통합 시스템 구축 제안서</div>
+
+      <h1 class="cover-title">
+        행주기씨대종중<br>
+        통합 시스템 구축.
+      </h1>
+
+      <p class="cover-subtitle">
+        42,924명의 종친 데이터, 33대에 걸친 계보, 800여 가문과의 혼인 네트워크 —
+        지금까지 쌓아온 가문의 기록을 안전히 보존하고,
+        조상의 얼을 자랑스럽게 발견할 수 있는 통합 디지털 플랫폼.
+      </p>
+
+      <div class="cover-meta-grid">
+        <div class="meta-block">
+          <div class="meta-label">제출처</div>
+          <div class="meta-value">행주기씨대종중</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">개발사</div>
+          <div class="meta-value">비즈스타트<br>Bizstart</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">제안일</div>
+          <div class="meta-value">2026년 5월<br>v1.0</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">기간</div>
+          <div class="meta-value">12주<br>(Phase 1)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- THE MISSION — 세대 격차 위기              -->
+<!-- ═════════════════════════════════════ -->
+<section class="crisis">
+  <div class="container">
+    <div class="section-num">The Mission — 시급한 과제</div>
+    <h2 class="crisis-title">
+      33세대에 등록된 종친은 <em>단 1명.</em>
+    </h2>
+    <p class="crisis-lead">
+      행주기씨가 수백년을 이어왔지만, 디지털 시대 청년 종친의 등록·참여가 무너지고 있습니다.
+    </p>
+
+    <div class="crisis-data">
+      <div class="gen-decline">
+        <div class="gen-cell">
+          <div class="gen-label">28世</div>
+          <div class="gen-value">7,847</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 100%;"></div></div>
+          <div class="gen-desc">일제~해방<br>(현 70~80대)</div>
+        </div>
+        <div class="gen-cell">
+          <div class="gen-label">29世</div>
+          <div class="gen-value">6,193</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 79%;"></div></div>
+          <div class="gen-desc">전쟁~산업화<br>(현 60~70대)</div>
+        </div>
+        <div class="gen-cell">
+          <div class="gen-label">30世</div>
+          <div class="gen-value">3,305</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 42%;"></div></div>
+          <div class="gen-desc">베이비붐<br>(현 50~60대)</div>
+        </div>
+        <div class="gen-cell danger">
+          <div class="gen-label">31世</div>
+          <div class="gen-value">874</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 11%;"></div></div>
+          <div class="gen-desc">X세대<br>(현 40~50대)</div>
+        </div>
+        <div class="gen-cell critical">
+          <div class="gen-label">32世</div>
+          <div class="gen-value">77</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 1%;"></div></div>
+          <div class="gen-desc">밀레니얼<br>(현 20~30대)</div>
+        </div>
+        <div class="gen-cell critical">
+          <div class="gen-label">33世</div>
+          <div class="gen-value">1</div>
+          <div class="gen-bar-wrap"><div class="gen-bar" style="height: 0.5%;"></div></div>
+          <div class="gen-desc">Z세대<br>(현 10대 이하)</div>
+        </div>
+      </div>
+
+      <div class="crisis-message">
+        <div class="crisis-quote">
+          청년이 등록되지 않으면<br>
+          가문의 디지털 기록은<br>
+          한 세대 안에 멈춥니다.
+        </div>
+        <div class="crisis-msg">
+          <p>
+            현재 위원회 어르신들께서 <strong>30세대 이전의 데이터는 견고히 보존</strong>해 오셨습니다.
+            그러나 31세대(현 40~50대)부터 등록 인원이 73% 급감하며,
+            <strong>32세대(20~30대)는 단 77명, 33세대(10대 이하)는 1명</strong>에 불과합니다.
+          </p>
+          <p style="margin-top: 16px;">
+            이 시스템의 가장 중요한 미션은 단순히 기존 데이터를 디지털화하는 것이 아니라,
+            <strong>젊은 세대가 자발적으로 가문을 발견하고, 자랑하고, 참여하게 만드는 것</strong>입니다.
+            그래야 수백년의 역사가 다음 세대로 이어집니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- 01. 보유 자산                            -->
+<!-- ═════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-num">01 — 보유 자산</div>
+    <h2 class="section-title">
+      위기 속에서도 빛나는 <em>수백년의 자산</em>
+    </h2>
+    <p class="section-lead">
+      청년 등록 위기를 해결하기 위한 출발점은, 우리가 이미 가지고 있는 데이터의 가치를
+      재인식하는 것입니다.
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">총 종친</div>
+        <div class="stat-value">42,924<span class="stat-unit">명</span></div>
+        <div class="stat-desc">시조부터 33세대에 걸친<br>전체 등록 인원</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">생존 종친</div>
+        <div class="stat-value">15,338<span class="stat-unit">명</span></div>
+        <div class="stat-desc">신규 시스템의 잠재<br>활성 사용자 규모</div>
+        <div class="stat-trend">35.7%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">분파 구조</div>
+        <div class="stat-value">3<span class="stat-unit">단계</span></div>
+        <div class="stat-desc">대분파 6 → 중분파 7 →<br>세분파 다수의 트리</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">혼인 네트워크</div>
+        <div class="stat-value">800<span class="stat-unit">+ 가문</span></div>
+        <div class="stat-desc">며느리·사위로 연결된<br>약 29,000건의 혼인</div>
+      </div>
+    </div>
+
+    <div class="branch-section">
+      <div class="branch-title">분파 구조 (정무공파 기준)</div>
+      <div class="branch-tree">
+        <div class="branch-row level-1">
+          <div class="branch-name">정무공파 <span class="han">度公派</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 100%"></div></div>
+          <div class="branch-count">32,916명</div>
+          <div class="branch-pct">76.7%</div>
+        </div>
+        <div class="branch-row level-2">
+          <div class="branch-name">광주문중/덕성군 <span class="han">進公</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 55%"></div></div>
+          <div class="branch-count">13,945명</div>
+          <div class="branch-pct">42.4%</div>
+        </div>
+        <div class="branch-row level-3">
+          <div class="branch-name">기은문중 <span class="han">義獻</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 38%"></div></div>
+          <div class="branch-count">4,356명</div>
+          <div class="branch-pct">31.2%</div>
+        </div>
+        <div class="branch-row level-3">
+          <div class="branch-name">너부실문중 <span class="han">琡</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 32%"></div></div>
+          <div class="branch-count">3,675명</div>
+          <div class="branch-pct">26.4%</div>
+        </div>
+        <div class="branch-row level-2">
+          <div class="branch-name">장성문중/참판공 <span class="han">遠公</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 33%"></div></div>
+          <div class="branch-count">8,418명</div>
+          <div class="branch-pct">25.6%</div>
+        </div>
+        <div class="branch-row level-2">
+          <div class="branch-name">복재공파 <span class="han">遵公</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 17%"></div></div>
+          <div class="branch-count">4,252명</div>
+          <div class="branch-pct">12.9%</div>
+        </div>
+        <div class="branch-row level-2">
+          <div class="branch-name">별좌공파 <span class="han">适公</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 15%"></div></div>
+          <div class="branch-count">3,869명</div>
+          <div class="branch-pct">11.8%</div>
+        </div>
+        <div class="branch-row level-2">
+          <div class="branch-name">도승지공파 <span class="han">逈公</span></div>
+          <div class="branch-bar"><div class="branch-fill" style="width: 7%"></div></div>
+          <div class="branch-count">1,719명</div>
+          <div class="branch-pct">5.2%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- 03. 차별화                              -->
+<!-- ═════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-num">02 — 신규 시스템의 차별화</div>
+    <h2 class="section-title">
+      가문의 본질은 지키되 <em>운영은 자동화한다.</em>
+    </h2>
+    <p class="section-lead">
+      신규 시스템은 종친회의 전통적 운영 정신을 그대로 유지하면서, 종친의 참여 부담과
+      위원회의 행정 부담을 동시에 80% 이상 절감합니다.
+    </p>
+
+    <div class="comparison">
+      <div class="comp-card before">
+        <div class="comp-label">기존 — As-is</div>
+        <h3 class="comp-title">신규 등록 1건 처리</h3>
+        <ul class="comp-list">
+          <li>엑셀 양식 다운로드 후 수기 작성</li>
+          <li>이메일 또는 우편으로 제출</li>
+          <li>통장 입금 후 위원장에게 통보</li>
+          <li>위원회 회의에서 수동 매칭</li>
+          <li>위원이 DB에 직접 입력</li>
+          <li>처리 완료까지 수일~수주</li>
+        </ul>
+      </div>
+
+      <div class="comp-arrow">→</div>
+
+      <div class="comp-card after">
+        <div class="comp-label">신규 — To-be</div>
+        <h3 class="comp-title">5분 내 신청 완료</h3>
+        <ul class="comp-list">
+          <li>모바일에서 회원가입 + 가지 검색</li>
+          <li>본인 정보 입력 + 사진 자동 업로드</li>
+          <li>고유 입금 코드로 송금 안내</li>
+          <li>위원회 대시보드 자동 매칭 보조</li>
+          <li>한 번의 클릭으로 승인 + DB 반영</li>
+          <li>실시간 종친 알림</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- 04. 두 단계 전략                          -->
+<!-- ═════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-num">03 — 두 단계 전략</div>
+    <h2 class="section-title">
+      어르신은 안전하게, <em>청년은 매력적으로.</em>
+    </h2>
+    <p class="section-lead">
+      Phase 1에서는 위원회의 부담 없이 운영 가능한 견고한 인프라를 구축하고,
+      Phase 2에서는 청년 종친이 자발적으로 참여하는 콘텐츠 레이어를 추가합니다.
+      양 단계는 독립적으로 발주·검수 가능하며, Phase 1만으로도 완성된 시스템으로 동작합니다.
+    </p>
+
+    <!-- Phase 1 헤더 -->
+    <div style="margin-top: 80px; padding: 32px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;">
+      <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-dim); text-transform: uppercase;">PHASE 01</div>
+      <div>
+        <div style="font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2;">기반 시스템 — 어르신 친화</div>
+        <div style="font-size: 14px; color: var(--ink-mute); margin-top: 4px;">위원회 부담 절감, 데이터 안전 보존, 모바일 대응 — 검증된 기반을 먼저 구축합니다.</div>
+      </div>
+      <div style="font-family: var(--mono); font-size: 13px; color: var(--accent); text-align: right;">12주</div>
+    </div>
+
+    <div class="mockup-section">
+
+      <!-- M01 — 인터랙티브 가계도 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">01</div>
+          <div class="meta">FEATURE — Interactive Genealogy</div>
+          <h3>인터랙티브 가계도</h3>
+          <p>본인을 중심으로 직계 5대를 시각화하며, 양자관계는 점선으로 명확히 구분됩니다.
+            분파별 진입과 형제 관계 확장이 한 화면에서 자연스럽게 이루어집니다.</p>
+          <ul>
+            <li>23~28세 5세대 가로형 트리</li>
+            <li>양자(出系/入後) 점선 + 호박색 박스 표시</li>
+            <li>인물 클릭 → 상세 페이지로 즉시 이동</li>
+            <li>줌 / 드래그 / 검색 결합 탐색</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">hjkee.com / 가계도 / 기성도(成度)</div>
+            </div>
+            <div class="mockup-body">
+              <div class="tree-mock">
+                <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg">
+                  <!-- 세대 라벨 -->
+                  <text class="tree-gen" x="20" y="40">23世</text>
+                  <text class="tree-gen" x="20" y="100">24世</text>
+                  <text class="tree-gen" x="20" y="160">25世</text>
+                  <text class="tree-gen" x="20" y="220">26世</text>
+                  <text class="tree-gen" x="20" y="280">27世</text>
+                  <text class="tree-gen" x="20" y="340">28世</text>
+
+                  <!-- 23세 고조 -->
+                  <rect class="tree-node" x="180" y="20" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="240" y="36" text-anchor="middle">경순 敬舜</text>
+                  <text class="tree-text" x="240" y="48" text-anchor="middle" style="font-size:8px;fill:#999;">高祖 · 23세</text>
+
+                  <line class="tree-line" x1="240" y1="54" x2="240" y2="80"/>
+
+                  <!-- 24세 증조 -->
+                  <rect class="tree-node" x="180" y="80" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="240" y="96" text-anchor="middle">광국 光國</text>
+                  <text class="tree-text" x="240" y="108" text-anchor="middle" style="font-size:8px;fill:#999;">曾祖 · 24세</text>
+
+                  <line class="tree-line" x1="240" y1="114" x2="240" y2="140"/>
+
+                  <!-- 25세 조부 -->
+                  <rect class="tree-node" x="180" y="140" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="240" y="156" text-anchor="middle">춘연 春衍</text>
+                  <text class="tree-text" x="240" y="168" text-anchor="middle" style="font-size:8px;fill:#999;">祖父 · 25세</text>
+
+                  <!-- 25세에서 분기 (양자관계 시작) -->
+                  <line class="tree-line" x1="240" y1="174" x2="240" y2="195"/>
+                  <line class="tree-line" x1="120" y1="195" x2="360" y2="195"/>
+                  <line class="tree-line" x1="120" y1="195" x2="120" y2="210"/>
+                  <line class="tree-line" x1="240" y1="195" x2="240" y2="210"/>
+                  <line class="tree-line" x1="360" y1="195" x2="360" y2="210"/>
+
+                  <!-- 26세 부친 (3형제) -->
+                  <rect class="tree-node" x="60" y="210" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="120" y="226" text-anchor="middle">우돈 宇敦</text>
+                  <text class="tree-text" x="120" y="238" text-anchor="middle" style="font-size:8px;fill:#999;">백부</text>
+
+                  <rect class="tree-node" x="180" y="210" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="240" y="226" text-anchor="middle">우봉 宇鳳</text>
+                  <text class="tree-text" x="240" y="238" text-anchor="middle" style="font-size:8px;fill:#999;">父親</text>
+
+                  <rect class="tree-node adopted" x="300" y="210" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="360" y="226" text-anchor="middle">우석 宇石</text>
+                  <text class="tree-text" x="360" y="238" text-anchor="middle" style="font-size:8px;fill:#854d0e;">숙부 · 出系</text>
+
+                  <line class="tree-line" x1="240" y1="244" x2="240" y2="270"/>
+
+                  <!-- 27세 본인 (강조) -->
+                  <rect class="tree-node self" x="180" y="270" width="120" height="34" rx="4"/>
+                  <text class="tree-text self" x="240" y="286" text-anchor="middle">기성도 奇成度</text>
+                  <text class="tree-text self" x="240" y="298" text-anchor="middle" style="font-size:8px;opacity:0.85;">★ 本人 · 27세</text>
+
+                  <line class="tree-line" x1="240" y1="304" x2="240" y2="330"/>
+
+                  <!-- 28세 자녀 -->
+                  <rect class="tree-node" x="180" y="330" width="120" height="34" rx="4"/>
+                  <text class="tree-text" x="240" y="346" text-anchor="middle">기○○</text>
+                  <text class="tree-text" x="240" y="358" text-anchor="middle" style="font-size:8px;fill:#999;">아들 · 28세</text>
+
+                  <!-- 양자관계 점선 (우석 → 다른 가문으로 출계 표시) -->
+                  <path d="M 360 244 Q 420 280 440 320" class="tree-line adoption"/>
+                  <text class="tree-text" x="430" y="335" text-anchor="end" style="font-size:8px;fill:#a16207;">양가 →</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M02 — 혼인 네트워크 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">02</div>
+          <div class="meta">FEATURE — Marriage Network</div>
+          <h3>혼인 네트워크 시각화</h3>
+          <p>800여 가문과의 29,000건 혼인 관계를 인터랙티브 다이어그램으로 표현합니다.
+            행주기씨와 어느 가문이 역사적으로 깊이 통혼해 왔는지 한눈에 보입니다.</p>
+          <ul>
+            <li>며느리(받음) ↔ 사위(보냄) 양방향 흐름</li>
+            <li>가문별 통혼 빈도 두께 시각화</li>
+            <li>시대별 통혼 패턴 변화 분석</li>
+            <li>학술적·콘텐츠적 가치 있는 자료</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">hjkee.com / 통계 / 혼인 네트워크</div>
+            </div>
+            <div class="mockup-body">
+              <div class="sankey-mock">
+                <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+                  <text x="60" y="20" class="sankey-text" text-anchor="middle" style="font-weight:600;">며느리 받음</text>
+                  <text x="240" y="20" class="sankey-text" text-anchor="middle" style="font-weight:600;fill:#7c2d12;">행주기씨</text>
+                  <text x="420" y="20" class="sankey-text" text-anchor="middle" style="font-weight:600;">사위 보냄</text>
+
+                  <!-- 좌측 가문들 (며느리) -->
+                  <rect class="sankey-bar" x="20" y="40" width="80" height="44" fill="#7c2d12"/>
+                  <text class="sankey-text" x="60" y="58" text-anchor="middle" fill="white">김해김씨</text>
+                  <text class="sankey-num" x="60" y="72" text-anchor="middle" fill="white">739</text>
+
+                  <rect class="sankey-bar" x="20" y="92" width="80" height="42" fill="#9a3412"/>
+                  <text class="sankey-text" x="60" y="110" text-anchor="middle" fill="white">전주이씨</text>
+                  <text class="sankey-num" x="60" y="124" text-anchor="middle" fill="white">739</text>
+
+                  <rect class="sankey-bar" x="20" y="142" width="80" height="34" fill="#a16207"/>
+                  <text class="sankey-text" x="60" y="160" text-anchor="middle" fill="white">밀양박씨</text>
+                  <text class="sankey-num" x="60" y="172" text-anchor="middle" fill="white">563</text>
+
+                  <rect class="sankey-bar" x="20" y="184" width="80" height="26" fill="#a16207" fill-opacity="0.7"/>
+                  <text class="sankey-text" x="60" y="200" text-anchor="middle" fill="white">광산김씨</text>
+
+                  <rect class="sankey-bar" x="20" y="218" width="80" height="22" fill="#a16207" fill-opacity="0.5"/>
+                  <text class="sankey-text" x="60" y="232" text-anchor="middle" fill="white">파평윤씨</text>
+
+                  <rect class="sankey-bar" x="20" y="248" width="80" height="60" fill="#78716c"/>
+                  <text class="sankey-text" x="60" y="270" text-anchor="middle" fill="white">기타 800+</text>
+                  <text class="sankey-num" x="60" y="284" text-anchor="middle" fill="white">12,355</text>
+
+                  <!-- 중앙 (행주기씨) -->
+                  <rect class="sankey-bar" x="200" y="40" width="80" height="280" fill="#0c0a09"/>
+                  <text x="240" y="170" class="sankey-text" text-anchor="middle" fill="white" font-weight="600">행주기씨</text>
+                  <text x="240" y="186" class="sankey-num" text-anchor="middle" fill="white">42,924</text>
+                  <text x="240" y="202" class="sankey-num" text-anchor="middle" fill="white">29,163 婚</text>
+
+                  <!-- 우측 가문들 (사위) -->
+                  <rect class="sankey-bar" x="380" y="40" width="80" height="32" fill="#7c2d12" fill-opacity="0.85"/>
+                  <text class="sankey-text" x="420" y="56" text-anchor="middle" fill="white">전주이씨</text>
+                  <text class="sankey-num" x="420" y="68" text-anchor="middle" fill="white">148</text>
+
+                  <rect class="sankey-bar" x="380" y="80" width="80" height="28" fill="#9a3412" fill-opacity="0.85"/>
+                  <text class="sankey-text" x="420" y="98" text-anchor="middle" fill="white">광산김씨</text>
+
+                  <rect class="sankey-bar" x="380" y="116" width="80" height="26" fill="#a16207" fill-opacity="0.85"/>
+                  <text class="sankey-text" x="420" y="132" text-anchor="middle" fill="white">밀양박씨</text>
+
+                  <rect class="sankey-bar" x="380" y="150" width="80" height="22" fill="#a16207" fill-opacity="0.65"/>
+                  <text class="sankey-text" x="420" y="164" text-anchor="middle" fill="white">김해김씨</text>
+
+                  <rect class="sankey-bar" x="380" y="180" width="80" height="60" fill="#78716c"/>
+                  <text class="sankey-text" x="420" y="200" text-anchor="middle" fill="white">기타 700+</text>
+                  <text class="sankey-num" x="420" y="214" text-anchor="middle" fill="white">13,400</text>
+
+                  <!-- 좌측 → 중앙 흐름 -->
+                  <path d="M 100 40 C 150 40, 150 60, 200 60 L 200 84 C 150 84, 150 84, 100 84 Z" class="sankey-flow"/>
+                  <path d="M 100 92 C 150 92, 150 105, 200 105 L 200 134 C 150 134, 150 134, 100 134 Z" class="sankey-flow"/>
+                  <path d="M 100 142 C 150 142, 150 145, 200 145 L 200 170 C 150 170, 150 170, 100 170 Z" class="sankey-flow"/>
+                  <path d="M 100 184 C 150 184, 150 178, 200 178 L 200 195 C 150 195, 150 195, 100 195 Z" class="sankey-flow"/>
+                  <path d="M 100 218 C 150 218, 150 200, 200 200 L 200 215 C 150 215, 150 215, 100 215 Z" class="sankey-flow"/>
+                  <path d="M 100 248 C 150 248, 150 220, 200 220 L 200 320 C 150 320, 150 308, 100 308 Z" class="sankey-flow" fill-opacity="0.1"/>
+
+                  <!-- 중앙 → 우측 흐름 -->
+                  <path d="M 280 60 C 330 60, 330 50, 380 50 L 380 72 C 330 72, 330 80, 280 80 Z" class="sankey-flow"/>
+                  <path d="M 280 90 C 330 90, 330 90, 380 90 L 380 108 C 330 108, 330 105, 280 105 Z" class="sankey-flow"/>
+                  <path d="M 280 116 C 330 116, 330 122, 380 122 L 380 142 C 330 142, 330 130, 280 130 Z" class="sankey-flow"/>
+                  <path d="M 280 145 C 330 145, 330 155, 380 155 L 380 172 C 330 172, 330 158, 280 158 Z" class="sankey-flow"/>
+                  <path d="M 280 175 C 330 175, 330 185, 380 185 L 380 240 C 330 240, 330 320, 280 320 Z" class="sankey-flow" fill-opacity="0.1"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M03 — 항렬자 추천 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">03</div>
+          <div class="meta">FEATURE — Generation Character AI</div>
+          <h3>항렬자 자동 추천</h3>
+          <p>DB에서 자동 추출한 세대별 항렬자 표를 활용해, 신생아 등록 시 한자 이름을 자동 추천합니다.
+            가문 전통의 항렬 보존이 시스템적으로 지원됩니다.</p>
+          <ul>
+            <li>33세대 항렬자 패턴 자동 분석</li>
+            <li>세대별 위치(앞/뒤글자) 자동 인식</li>
+            <li>같은 음의 한자 후보 빈도순 정렬</li>
+            <li>위반 시 위원회 검토 안내</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">hjkee.com / 등록 / 자녀 정보</div>
+            </div>
+            <div class="mockup-body">
+              <div class="hangryeol-mock">
+                <div class="hangryeol-input">
+                  <span class="label">부친 세</span>
+                  <span class="val">29세 — 우(宇)자 항렬</span>
+                </div>
+                <div class="hangryeol-input">
+                  <span class="label">자녀 세</span>
+                  <span class="val">30세 — 도(度)자 항렬, 뒤글자 위치</span>
+                </div>
+                <div class="hangryeol-input" style="display:block;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="label">한글 이름</span>
+                    <span class="val">성도</span>
+                  </div>
+                </div>
+                <div class="hangryeol-card">
+                  <div class="hangryeol-cap">자동 추천 결과</div>
+                  <div class="hangryeol-result">
+                    <span class="han-big">成</span>
+                    <span class="han-big">度</span>
+                    <span style="font-size: 14px; color: var(--ink-mute); margin-left: 12px;">성도 / 30세</span>
+                  </div>
+                  <div style="font-size: 11px; color: var(--ink-mute); margin-top: 8px;">
+                    "성"의 한자 후보 (43명 사용 빈도순):
+                  </div>
+                  <div class="hanja-options">
+                    <div class="hanja-chip selected">成</div>
+                    <div class="hanja-chip">聖</div>
+                    <div class="hanja-chip">誠</div>
+                    <div class="hanja-chip">星</div>
+                    <div class="hanja-chip">性</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                  <button style="flex:1;padding:10px;background:var(--ink);color:white;border:none;border-radius:6px;font-family:inherit;font-size:13px;font-weight:500;">이 이름으로 등록 →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M04 — 모바일 앱 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">04</div>
+          <div class="meta">FEATURE — Mobile First + Native App</div>
+          <h3>모바일 우선 + 네이티브 앱</h3>
+          <p>iOS/Android 앱을 통해 종친회 행사 알림, 신규 등록 완료 푸시,
+            가계도 빠른 조회를 제공합니다. 어르신·청년 모두에게 자연스러운 접근 환경입니다.</p>
+          <ul>
+            <li>카드 스택형 가계도 — 스와이프로 세대 이동</li>
+            <li>큰 글씨 + 명료한 메뉴 (어르신 친화)</li>
+            <li>FCM 푸시 알림 (행사·신규등록·승인 결과)</li>
+            <li>iOS / Android 앱 동시 출시</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>● ●●● ⚡ 100%</span>
+              </div>
+              <div class="phone-content">
+                <div class="mobile-tree">
+                  <div class="mt-header">
+                    <div class="mt-gen">27世 · 정무공파 · 본인</div>
+                    <div class="mt-name">기성도<span class="mt-han">奇成度</span></div>
+                    <div class="mt-meta">1962년 임인년 6월 12일생</div>
+                  </div>
+
+                  <div class="mt-card up">
+                    <span class="arrow">↑</span>
+                    <div class="info">
+                      <span class="ko">우봉</span><span class="h">宇鳳</span>
+                      <div style="font-size:10px;color:var(--ink-dim);">부친 · 26세</div>
+                    </div>
+                  </div>
+
+                  <div class="mt-card self">
+                    <div class="mt-name" style="font-size:18px;">기성도 <span class="mt-han">奇成度</span></div>
+                    <div class="mt-meta">자(字) 成道</div>
+                  </div>
+
+                  <div class="mt-card">
+                    <span class="arrow">↓</span>
+                    <div class="info">
+                      <span class="ko">기○○</span>
+                      <div style="font-size:10px;color:var(--ink-dim);">아들 · 28세</div>
+                    </div>
+                  </div>
+
+                  <div class="mt-card" style="background:var(--accent-bg);border-color:var(--accent);">
+                    <span class="arrow" style="color:var(--accent);">←→</span>
+                    <div class="info">
+                      <span style="color:var(--accent);font-weight:600;font-size:11px;">형제 4명 보기</span>
+                      <div style="font-size:9px;color:var(--ink-mute);">좌우 스와이프</div>
+                    </div>
+                  </div>
+
+                  <div class="mt-swipe">↕ 위·아래 스와이프 = 세대 이동</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M05 — 위원회 대시보드 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">05</div>
+          <div class="meta">FEATURE — Committee Dashboard</div>
+          <h3>위원회 통합 대시보드</h3>
+          <p>신규 등록 신청, 입금 매칭, 정보 수정 검토가 하나의 화면에서 처리됩니다.
+            통장 거래 내역을 붙여넣으면 자동으로 신청과 매칭되어, 위원회 행정 부담이 80% 절감됩니다.</p>
+          <ul>
+            <li>신청 단계별 큐 관리 (대기·입금·검토·승인)</li>
+            <li>통장 입금 자동 매칭 (입금자명 + 코드)</li>
+            <li>변경 이력 영구 audit log</li>
+            <li>분파별 권한 분리 (RLS)</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">admin.hjkee.com / dashboard</div>
+            </div>
+            <div class="mockup-body">
+              <div class="dash-mock">
+                <div class="dash-tile alert">
+                  <div class="dash-label">인증 대기</div>
+                  <div class="dash-value">12</div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-label">입금 대기</div>
+                  <div class="dash-value">8</div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-label">검토 중</div>
+                  <div class="dash-value">3</div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-label">이번달 승인</div>
+                  <div class="dash-value">27</div>
+                </div>
+              </div>
+
+              <div class="dash-table">
+                <div class="dash-row head">
+                  <div>신청자</div>
+                  <div>코드</div>
+                  <div>상태</div>
+                  <div>작업</div>
+                </div>
+                <div class="dash-row">
+                  <div><strong>기성도</strong> · 30세 · 정무공파</div>
+                  <div class="meta" style="font-family:var(--mono);font-size:10px;">SD2410</div>
+                  <div><span class="dash-status matched">입금완료</span></div>
+                  <div class="dash-action">검토 →</div>
+                </div>
+                <div class="dash-row">
+                  <div><strong>기호준</strong> · 33세 · 광주문중</div>
+                  <div class="meta" style="font-family:var(--mono);font-size:10px;">HJ2411</div>
+                  <div><span class="dash-status pending">대기</span></div>
+                  <div class="dash-action">확인 →</div>
+                </div>
+                <div class="dash-row">
+                  <div><strong>기노준</strong> · 27세 · 낭장공파</div>
+                  <div class="meta" style="font-family:var(--mono);font-size:10px;">NJ2410</div>
+                  <div><span class="dash-status review">검토중</span></div>
+                  <div class="dash-action">승인 →</div>
+                </div>
+                <div class="dash-row">
+                  <div><strong>기영도</strong> · 30세 · 정무공파</div>
+                  <div class="meta" style="font-family:var(--mono);font-size:10px;">YD2411</div>
+                  <div><span class="dash-status matched">입금완료</span></div>
+                  <div class="dash-action">검토 →</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 12px; padding: 10px 12px; background: var(--bg-elevated); border-radius: 6px; font-size: 11px; color: var(--ink-mute); display: flex; align-items: center; gap: 8px;">
+                <span style="color: var(--green); font-weight: 600;">✓</span>
+                통장 거래 자동 매칭 완료 — 4건 매칭, 1건 수동 확인 필요
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M06 — 한자 한글 통합 검색 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">06</div>
+          <div class="meta">FEATURE — Unified Search</div>
+          <h3>한자·한글 통합 검색</h3>
+          <p>한글로 검색해도, 한자로 검색해도, 자(字)·호(號)·시호로 검색해도 정확하게 인물을 찾습니다.
+            동명이인은 부친·조부 정보로 자동 분리됩니다.</p>
+          <ul>
+            <li>한글 / 한자 / 자·호 통합 인덱스</li>
+            <li>동명이인 자동 분리 (부친·조부·세 기준)</li>
+            <li>실시간 자동 완성 (debounced)</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">hjkee.com / 인터넷족보 검색</div>
+            </div>
+            <div class="mockup-body">
+              <div class="search-mock">
+                <div class="search-bar">
+                  <div class="icon"></div>
+                  <input value="성도" readonly />
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--ink-dim);">83건</span>
+                </div>
+
+                <div class="search-filters">
+                  <div class="search-chip active">전체</div>
+                  <div class="search-chip">정무공파</div>
+                  <div class="search-chip">낭장공파</div>
+                  <div class="search-chip">생존자만</div>
+                  <div class="search-chip">27세</div>
+                </div>
+
+                <div style="margin-top: 4px;">
+                  <div class="search-result highlight">
+                    <div class="name">성도<span class="h">成度</span></div>
+                    <div class="meta">父 우봉</div>
+                    <div class="meta">27세</div>
+                    <div class="meta">낭장공파</div>
+                  </div>
+                  <div class="search-result">
+                    <div class="name">성도<span class="h">聲度</span></div>
+                    <div class="meta">父 우돈</div>
+                    <div class="meta">27세</div>
+                    <div class="meta">낭장공파</div>
+                  </div>
+                  <div class="search-result">
+                    <div class="name">성도<span class="h">展度</span></div>
+                    <div class="meta">父 우석</div>
+                    <div class="meta">27세</div>
+                    <div class="meta">낭장공파</div>
+                  </div>
+                  <div class="search-result">
+                    <div class="name">성도<span class="h">性度</span></div>
+                    <div class="meta">父 우용</div>
+                    <div class="meta">27세</div>
+                    <div class="meta">낭장공파</div>
+                  </div>
+                  <div class="search-result">
+                    <div class="name">차성도 처<span class="h">車聖度 妻</span></div>
+                    <div class="meta">父 배창</div>
+                    <div class="meta">22세</div>
+                    <div class="meta">낭장공파</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M07 — 가승보 PDF -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num">07</div>
+          <div class="meta">FEATURE — Auto-generated PDF</div>
+          <h3>가승보 PDF 자동 생성</h3>
+          <p>본인 직계 가지의 가승보를 한문 원문 + 한글 번역 형태로 자동 생성</p>
+          <ul>
+            <li>한문 원문 + 한글 번역 병기</li>
+            <li>가족 행사·증정용 즉시 마련 가능</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="pdf-mock">
+            <div class="pdf-mock-title">家乘譜 · 가승보</div>
+            <div class="pdf-mock-han">幸州 奇氏 · 27世 奇成度</div>
+            <div class="pdf-mock-line"></div>
+
+            <div class="pdf-mock-content">
+              <div class="pdf-mock-row">
+                <div class="l">姓名</div>
+                <div>奇成度 (기성도)</div>
+              </div>
+              <div class="pdf-mock-row">
+                <div class="l">字</div>
+                <div>成道</div>
+              </div>
+              <div class="pdf-mock-row">
+                <div class="l">世系</div>
+                <div>27세 · 정무공파 · 낭장공</div>
+              </div>
+              <div class="pdf-mock-row">
+                <div class="l">生年</div>
+                <div>1962년 임인(壬寅) 6월 12일</div>
+              </div>
+              <div class="pdf-mock-row">
+                <div class="l">父</div>
+                <div>奇宇鳳 (기우봉)</div>
+              </div>
+              <div class="pdf-mock-row">
+                <div class="l">祖父</div>
+                <div>奇春衍 (기춘연)</div>
+              </div>
+
+              <div class="pdf-mock-original">
+                字成道 一九六二年 壬寅 六月 十二日 生 不單
+              </div>
+            </div>
+
+            <div class="pdf-mock-actions">
+              <div class="pdf-mock-btn">10부 주문</div>
+              <div class="pdf-mock-btn outline">미리보기</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Phase 2 헤더 -->
+    <div style="margin-top: 120px; padding: 32px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;">
+      <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase;">PHASE 02</div>
+      <div>
+        <div style="font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--accent);">청년 확장 — 다음 세대 유입</div>
+        <div style="font-size: 14px; color: var(--ink-mute); margin-top: 4px;">31~33세대 청년이 자발적으로 가문을 발견하고 자랑하는 콘텐츠 레이어. Phase 1 완료 후 단계적 검토 가능합니다.</div>
+      </div>
+      <div style="font-family: var(--mono); font-size: 13px; color: var(--accent); text-align: right;">8주</div>
+    </div>
+
+    <div class="mockup-section">
+
+      <!-- M08 — AI 조상 발견 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num" style="color: var(--accent);">08</div>
+          <div class="meta" style="color: var(--accent);">PHASE 2 — Onboarding</div>
+          <h3>AI 조상 발견 · "내 조상은 누구?"</h3>
+          <p>청년이 처음 가입했을 때 5분 안에 본인의 가문 정체성을 깨닫게 만드는 진입점입니다.
+            이름·생년·부친 이름만 입력하면 AI가 가계도에서 본인 위치를 자동 탐색하고,
+            가장 유명한 조상을 카드로 소개합니다.</p>
+          <ul>
+            <li>3단계 입력 (이름·생년·부친) → 자동 매칭</li>
+            <li>본인의 세대·분파 자동 판정</li>
+            <li>유명 조상 1명을 인물 카드로 즉시 소개</li>
+            <li>"당신은 ○○공의 9대손" 같은 강력한 정체성 메시지</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>● ●●● ⚡ 100%</span>
+              </div>
+              <div class="phone-content" style="padding: 20px 16px;">
+                <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">RESULT · 분석 완료</div>
+                <div style="font-size: 22px; font-weight: 600; line-height: 1.3; margin-bottom: 4px;">당신은</div>
+                <div style="font-size: 28px; font-weight: 700; line-height: 1.2; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 16px;">정무공의<br>9대손입니다</div>
+
+                <div style="background: linear-gradient(135deg, var(--ink), #1c1917); border-radius: 16px; padding: 20px; color: white; margin-bottom: 12px; position: relative; overflow: hidden;">
+                  <div style="position: absolute; top: 12px; right: 16px; font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em;">★★★★★</div>
+                  <div style="font-family: var(--serif); font-style: italic; font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px;">19世 政務公</div>
+                  <div style="font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px;">奇虔 (기건)</div>
+                  <div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 11px; color: rgba(255,255,255,0.7);">
+                    <span style="color: rgba(255,255,255,0.4); font-family: var(--mono); font-size: 9px;">시기</span>
+                    <span>1390 — 1460</span>
+                    <span style="color: rgba(255,255,255,0.4); font-family: var(--mono); font-size: 9px;">관직</span>
+                    <span>대사헌 · 영의정</span>
+                    <span style="color: rgba(255,255,255,0.4); font-family: var(--mono); font-size: 9px;">업적</span>
+                    <span>청백리에 녹선</span>
+                  </div>
+                  <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 11px; color: var(--accent);">
+                    당신의 9대 조부 ↑
+                  </div>
+                </div>
+
+                <div style="background: var(--bg-soft); border-radius: 12px; padding: 14px; font-size: 11px; color: var(--ink-mute); line-height: 1.6;">
+                  <div style="font-weight: 600; color: var(--ink); margin-bottom: 4px;">📜 더 알아보기</div>
+                  당신의 직계 조상 28명을 시간순으로 만나보세요.
+                </div>
+
+                <button style="width:100%; margin-top: 12px; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 600;">
+                  내 가계도 전체 보기 →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M09 — 가문 카드 SNS 공유 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num" style="color: var(--accent);">09</div>
+          <div class="meta" style="color: var(--accent);">PHASE 2 — Social Share</div>
+          <h3>인스타 스타일 가문 카드</h3>
+          <p>청년이 본인의 가문 정체성을 친구들에게 자랑할 수 있는 콘텐츠로 변환합니다.
+            인스타그램·카카오톡·트위터 공유에 최적화된 비주얼 카드를 자동 생성하여,
+            한 명의 청년 등록이 자연스럽게 친·인척의 신규 가입으로 이어지는 바이럴 구조를 만듭니다.</p>
+          <ul>
+            <li>1:1 정사각형 / 9:16 스토리 두 가지 비율</li>
+            <li>본인의 분파·세대·조상 정보 자동 합성</li>
+            <li>인스타·카카오톡·X(트위터) 원클릭 공유</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
+            <!-- 정사각형 카드 -->
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #0c0a09, #1c1917); border-radius: 16px; padding: 24px; color: white; position: relative; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.15);">
+              <div style="position: absolute; top: 16px; right: 16px; font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em;">幸 州 奇 氏</div>
+              <div style="font-family: var(--serif); font-style: italic; font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 4px;">PROUD MEMBER</div>
+              <div style="font-size: 24px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.02em;">나는<br>27세<br>정무공파의<br>후손입니다</div>
+              <div style="position: absolute; bottom: 24px; left: 24px; right: 24px;">
+                <div style="font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">600 YEARS · 33 GENERATIONS</div>
+                <div style="font-family: var(--serif); font-style: italic; font-size: 14px; color: rgba(255,255,255,0.7);">시조로부터 27세대</div>
+              </div>
+              <div style="position: absolute; top: 50%; right: -20px; font-family: var(--serif); font-size: 80px; color: var(--accent); opacity: 0.4; line-height: 1; transform: translateY(-50%);">奇</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- 공유 버튼들 -->
+              <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); flex-shrink: 0;"></div>
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; font-weight: 600;">Instagram</div>
+                  <div style="font-size: 10px; color: var(--ink-mute);">스토리 / 피드</div>
+                </div>
+                <div style="font-size: 11px; color: var(--accent);">→</div>
+              </div>
+              <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: #fee500; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #371D1E; font-size: 14px;">K</div>
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; font-weight: 600;">카카오톡</div>
+                  <div style="font-size: 10px; color: var(--ink-mute);">친구 / 단톡방</div>
+                </div>
+                <div style="font-size: 11px; color: var(--accent);">→</div>
+              </div>
+              <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: black; flex-shrink: 0; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">𝕏</div>
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; font-weight: 600;">X (Twitter)</div>
+                  <div style="font-size: 10px; color: var(--ink-mute);">타임라인</div>
+                </div>
+                <div style="font-size: 11px; color: var(--accent);">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M10 — 동년배 종친 찾기 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num" style="color: var(--accent);">10</div>
+          <div class="meta" style="color: var(--accent);">PHASE 2 — Same Generation</div>
+          <h3>동년배 종친 찾기</h3>
+          <p>같은 세대(예: 31세)의 종친이 얼마나 살아있는지, 어디에 거주하는지를 보여주어
+            청년의 고립감을 해소하고 모임 참여 동기를 높입니다. 직접 메시지는 차단하고
+            활동 알림만 제공해 종친회의 보수적 정서를 존중합니다.</p>
+          <ul>
+            <li>같은 세대 종친 인원 / 분파별 분포</li>
+            <li>비슷한 연령대 (±5세) 자동 그룹</li>
+            <li>지역별 분포 (시·도 단위만 공개)</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>● ●●● ⚡ 100%</span>
+              </div>
+              <div class="phone-content" style="padding: 16px;">
+                <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px;">My Generation · 31世</div>
+                <div style="font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 12px;">내 또래 종친</div>
+
+                <div style="background: var(--ink); border-radius: 12px; padding: 16px; color: white; margin-bottom: 12px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                    <div style="font-size: 11px; color: rgba(255,255,255,0.6);">전국 31세 생존</div>
+                    <div style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em;">874<span style="font-size: 12px; color: rgba(255,255,255,0.5); margin-left: 2px;">명</span></div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(20, 1fr); gap: 1px; margin-top: 8px;">
+                    <!-- 점 그래프 -->
+                    <div style="aspect-ratio: 1; background: var(--accent); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: var(--accent); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: var(--accent); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: var(--accent); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: var(--accent); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.7); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.7); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.7); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.7); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.5); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.5); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.5); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                    <div style="aspect-ratio: 1; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                  </div>
+                  <div style="font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 8px; font-family: var(--mono);">● 정무공파 612 ● 광주문중 178 ● 기타 84</div>
+                </div>
+
+                <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 8px;">
+                  <div style="font-size: 10px; color: var(--ink-mute); margin-bottom: 4px;">📍 비슷한 지역 (서울)</div>
+                  <div style="font-size: 16px; font-weight: 700; color: var(--ink);">128명</div>
+                  <div style="font-size: 9px; color: var(--ink-mute); margin-top: 2px;">강남 32 · 강북 24 · 마포 18 · 그 외 54</div>
+                </div>
+
+                <div style="background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 12px; padding: 14px;">
+                  <div style="font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 4px;">UPCOMING</div>
+                  <div style="font-size: 13px; font-weight: 600; color: var(--ink);">2026 정기 총회</div>
+                  <div style="font-size: 10px; color: var(--ink-mute); margin-top: 2px;">5월 15일 · 31세 종친 23명 참석 예정</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M11 — AI 가문 도우미 챗봇 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num" style="color: var(--accent);">11</div>
+          <div class="meta" style="color: var(--accent);">PHASE 2 — AI Assistant</div>
+          <h3>AI 가문 도우미 챗봇</h3>
+          <p>조상 정보·가계도·종친회 절차에 대한 자연어 질문에 즉시 답변하는 AI 챗봇입니다.
+            어르신은 등록·수정 절차를 안내받고, 청년은 본인 직계 조상의 이야기를
+            대화 형식으로 손쉽게 탐색합니다.</p>
+          <ul>
+            <li>자연어 질문 → 즉시 답변 (조상·가계도·절차)</li>
+            <li>가문 DB·족보 원문 기반 정확한 응답 (출처 표시)</li>
+            <li>24시간 무인 응대 — 위원회 문의 부담 절감</li>
+            <li>음성 입력 지원 — 어르신도 손쉽게 질문</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>● ●●● ⚡ 100%</span>
+              </div>
+              <div class="phone-content" style="padding: 16px 14px; background: var(--bg-soft);">
+                <div style="display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 14px;">
+                  <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-soft)); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--serif); font-size: 16px; font-style: italic;">奇</div>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--ink);">가문 도우미</div>
+                    <div style="font-size: 9px; color: var(--green); display: flex; align-items: center; gap: 4px;">
+                      <span style="width: 5px; height: 5px; border-radius: 50%; background: var(--green); display: inline-block;"></span>
+                      온라인 · 즉시 응답
+                    </div>
+                  </div>
+                  <div style="font-family: var(--mono); font-size: 9px; color: var(--ink-dim); letter-spacing: 0.1em;">AI</div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <div style="align-self: flex-end; max-width: 75%; background: var(--accent); color: white; padding: 9px 12px; border-radius: 14px 14px 4px 14px; font-size: 11px; line-height: 1.45;">
+                    내 9대조부에 대해 알려줘
+                  </div>
+
+                  <div style="align-self: flex-start; max-width: 85%; background: white; border: 1px solid var(--border); padding: 11px 13px; border-radius: 14px 14px 14px 4px; font-size: 11px; line-height: 1.55; color: var(--ink-soft);">
+                    <span style="color: var(--accent); font-weight: 600;">정무공 기건(奇虔, 1390-1460)</span>은
+                    조선 초기 청백리로,<br>대사헌과 영의정을 지내신 분입니다.
+                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 9px; color: var(--ink-dim); display: flex; gap: 6px;">
+                      <span>📜 출처: 정무공파보 v3.2</span>
+                    </div>
+                  </div>
+
+                  <div style="align-self: flex-end; max-width: 75%; background: var(--accent); color: white; padding: 9px 12px; border-radius: 14px 14px 4px 14px; font-size: 11px; line-height: 1.45;">
+                    다음 정기 총회는 언제야?
+                  </div>
+
+                  <div style="align-self: flex-start; max-width: 85%; background: white; border: 1px solid var(--border); padding: 11px 13px; border-radius: 14px 14px 14px 4px; font-size: 11px; line-height: 1.55; color: var(--ink-soft);">
+                    <strong style="color: var(--ink);">2026 정기 총회</strong>는
+                    <span style="color: var(--accent); font-weight: 600;">5월 15일(목)</span>입니다.
+                    <div style="margin-top: 6px; font-size: 10px; color: var(--ink-mute);">캘린더에 추가하시겠어요?</div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 14px; display: flex; align-items: center; gap: 6px; background: white; border: 1px solid var(--border); border-radius: 20px; padding: 8px 10px;">
+                  <div style="font-size: 10px; color: var(--ink-dim); flex: 1;">메시지 입력...</div>
+                  <div style="width: 22px; height: 22px; border-radius: 50%; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center; font-size: 11px;">🎙</div>
+                  <div style="width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px;">↑</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M11 보조: 지원 질문 카테고리 -->
+      <div style="margin-top: 8px; padding: 36px 32px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 16px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+          <div>
+            <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px;">SUPPORTED QUERIES</div>
+            <h4 style="font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink);">챗봇이 답변하는 5가지 질문 유형</h4>
+          </div>
+          <div style="font-size: 12px; color: var(--ink-mute); max-width: 360px; line-height: 1.5;">
+            가문 데이터·족보 원문·시스템 매뉴얼·행사 일정을 통합한 RAG 기반으로,
+            아래 모든 유형에 정확한 답변과 출처를 함께 제공합니다.
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: var(--mono);">01</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink);">가족 관계</div>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11px; color: var(--ink-soft); line-height: 1.5;">
+              <li>“기성도와 기영도는 몇 촌이야?”</li>
+              <li>“내 9대 조부가 누구야?”</li>
+              <li>“정무공파 시조가 누구야?”</li>
+              <li>“내가 ○○공의 몇 대손이야?”</li>
+            </ul>
+          </div>
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: var(--mono);">02</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink);">가문 역사</div>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11px; color: var(--ink-soft); line-height: 1.5;">
+              <li>“행주기씨 시조가 누구야?”</li>
+              <li>“정무공파는 언제 분파됐어?”</li>
+              <li>“우리 가문에서 가장 유명한 인물은?”</li>
+              <li>“조선시대 영의정 지낸 분 있어?”</li>
+            </ul>
+          </div>
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: var(--mono);">03</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink);">도메인 용어</div>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11px; color: var(--ink-soft); line-height: 1.5;">
+              <li>“수단이 뭐야?”</li>
+              <li>“가승보는 어떻게 신청해?”</li>
+              <li>“촌수 계산은 어떻게 해?”</li>
+              <li>“출계랑 입후 차이가 뭐야?”</li>
+            </ul>
+          </div>
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: var(--mono);">04</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink);">시스템 사용법</div>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11px; color: var(--ink-soft); line-height: 1.5;">
+              <li>“신규 등록은 어떻게 해?”</li>
+              <li>“수단비는 얼마야?”</li>
+              <li>“사진은 어떻게 올려?”</li>
+              <li>“비밀번호 잃어버렸어”</li>
+            </ul>
+          </div>
+
+          <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: var(--mono);">05</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink);">행사·일정</div>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 11px; color: var(--ink-soft); line-height: 1.5;">
+              <li>“다음 시제가 언제야?”</li>
+              <li>“○○공 기일은 언제야?”</li>
+              <li>“총회 장소가 어디야?”</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <!-- M12 — 분파 자치 -->
+      <div class="mockup-block">
+        <div class="mockup-text">
+          <div class="num" style="color: var(--accent);">12</div>
+          <div class="meta" style="color: var(--accent);">PHASE 2 — Branch Autonomy</div>
+          <h3>분파별 자치 운영</h3>
+          <p>각 분파별 임원진, 행사 캘린더, 종친 명단이 별도로 관리되며 권한이 분리됩니다.
+            대종중 차원의 공지와 분파 차원의 공지가 자연스럽게 구분됩니다.</p>
+          <ul>
+            <li>6개 대분파 → 7개 중분파 → 다수 세분파</li>
+            <li>분파별 임원진 + 행사 캘린더 + 게시판</li>
+            <li>본인 분파 종친 명단 (개인정보 격리)</li>
+            <li>대종중 + 분파 이중 알림 채널</li>
+          </ul>
+        </div>
+        <div class="mockup-visual">
+          <div class="mockup-screen">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url">hjkee.com / 분파 / 정무공파</div>
+            </div>
+            <div class="mockup-body">
+              <div class="branch-mock-grid">
+                <div class="branch-card-mock featured">
+                  <div class="branch-card-head">
+                    <div>
+                      <span class="branch-card-name">정무공파</span>
+                      <span class="branch-card-han">度公派</span>
+                    </div>
+                    <span class="branch-card-count">32,916명</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--ink-mute);">시조 度公 諱 ○○ · 본인 분파</div>
+                  <div class="branch-card-meta">
+                    <div>임원<span class="v">12명</span></div>
+                    <div>생존<span class="v">11,253</span></div>
+                  </div>
+                  <div class="branch-card-events">
+                    <div class="ev"><span>정기 총회</span><span>5/15</span></div>
+                    <div class="ev"><span>춘계 시제</span><span>4/20</span></div>
+                  </div>
+                </div>
+
+                <div class="branch-card-mock">
+                  <div class="branch-card-head">
+                    <div>
+                      <span class="branch-card-name">광주문중</span>
+                      <span class="branch-card-han">進公</span>
+                    </div>
+                    <span class="branch-card-count">13,945명</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--ink-mute);">중분파 · 정무공파 자손</div>
+                  <div class="branch-card-meta">
+                    <div>임원<span class="v">8명</span></div>
+                    <div>비율<span class="v">42.4%</span></div>
+                  </div>
+                </div>
+
+                <div class="branch-card-mock">
+                  <div class="branch-card-head">
+                    <div>
+                      <span class="branch-card-name">기은문중</span>
+                      <span class="branch-card-han">義獻</span>
+                    </div>
+                    <span class="branch-card-count">4,356명</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--ink-mute);">세분파 · 광주문중 자손</div>
+                  <div class="branch-card-meta">
+                    <div>활성<span class="v">활발</span></div>
+                    <div>비율<span class="v">31.2%</span></div>
+                  </div>
+                </div>
+
+                <div class="branch-card-mock">
+                  <div class="branch-card-head">
+                    <div>
+                      <span class="branch-card-name">너부실문중</span>
+                      <span class="branch-card-han">琡</span>
+                    </div>
+                    <span class="branch-card-count">3,675명</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--ink-mute);">세분파 · 광주문중 자손</div>
+                  <div class="branch-card-meta">
+                    <div>활성<span class="v">활발</span></div>
+                    <div>비율<span class="v">26.4%</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 12px; padding: 10px 12px; background: #fef3c7; border-radius: 6px; font-size: 11px; color: #854d0e; display: flex; align-items: center; gap: 8px;">
+                <span style="font-weight:600;">⚠</span>
+                규정공파(9명), 재신공파(0명) — 멸문 위기 분파에 우선 등록 캠페인 권장
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- 05. 일정                                -->
+<!-- ═════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-num">04 — 12주 개발 일정</div>
+    <h2 class="section-title">
+      <em>12주.</em> 단계적 개발 프로세스(Phase 1)
+    </h2>
+    <div class="timeline-wrap">
+      <div class="timeline-track">
+
+        <div class="tl-week milestone">
+          <div class="tl-num">Week 1 — Kickoff</div>
+          <div class="tl-title">데이터 분석 및 ERD 확정</div>
+          <div class="tl-desc">
+            기존 DB 백업 수령 및 분석. 인코딩·정규화·외래키 무결성 검증.
+            본관 정규화(800여 가문), 항렬자 자동 추출, 분파 트리 구조 매핑.
+            Supabase 스키마 최종 확정 및 마이그레이션 스크립트 1차 작성.
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 2 — Migration</div>
+          <div class="tl-title">데이터 마이그레이션 및 검증</div>
+          <div class="tl-desc">
+            42,924명 인물 데이터, 양자관계 200건+, 혼인관계 29,000건 이전.
+            기존 통계 수치(세별·생존/사망·분파별)와 100% 일치 검증 보고서 제출.
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 3 — Search</div>
+          <div class="tl-title">인물 검색 및 상세 페이지</div>
+          <div class="tl-desc">
+            한글·한자·자·호·관직·배우자 통합 검색 구현. 동명이인 부친 검색 보조 UI.
+            인물 상세 페이지(개인자료, 사진, 족보 원문/번역) 디자인 및 개발.
+          </div>
+        </div>
+
+        <div class="tl-week milestone">
+          <div class="tl-num">Week 4 — Visualization</div>
+          <div class="tl-title">가계도 시각화 (데스크톱)</div>
+          <div class="tl-desc">
+            5세대 인터랙티브 트리 시각화. 양자관계 점선 표시, 분파 단위 진입,
+            전체/부분 줌 컨트롤. 형제 관계 확장 UI.
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 5 — Mobile</div>
+          <div class="tl-title">모바일 가계도 + 반응형</div>
+          <div class="tl-desc">
+            카드 스택형 모바일 가계도(스와이프 기반) 구현. 어르신 사용성을 고려한
+            큰 글씨, 명료한 메뉴, 한자 병기. 전체 화면 반응형 작업.
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 6 — Domain</div>
+          <div class="tl-title">양자 출입현황 + 촌수 계산</div>
+          <div class="tl-desc">
+            양자 출입현황 카드형 재구성. 촌수 자동 계산 알고리즘(LCA + 재귀 CTE).
+            생부/양부 라인 선택 옵션. 두 인물 간 공통 조상 시각화.
+          </div>
+        </div>
+
+        <div class="tl-week milestone">
+          <div class="tl-num">Week 7 — Registration</div>
+          <div class="tl-title">신규 등록 + 위원회 인증</div>
+          <div class="tl-desc">
+            5단계 신규 등록 워크플로우. 항렬자 자동 추천, 한자 추천 엔진,
+            사진 4매 자동 리사이즈. 위원회 회원 인증 시스템(가족관계 대조 기반).
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 8 — Admin</div>
+          <div class="tl-title">위원회 통합 대시보드</div>
+          <div class="tl-desc">
+            신청 큐 관리, 통장 입금 매칭 자동화 도구, 변경 이력(audit log),
+            인우보증 등 증거 자료 관리. 분파별 권한 분리(RLS).
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 9 — Statistics</div>
+          <div class="tl-title">통계 대시보드 + 혼인 네트워크</div>
+          <div class="tl-desc">
+            9종 통계 메뉴 인터랙티브 시각화. 혼인 네트워크 Sankey 다이어그램,
+            지역별 카카오맵 분포, 흔한 이름 워드 클라우드. 인구 피라미드.
+          </div>
+        </div>
+
+        <div class="tl-week milestone">
+          <div class="tl-num">Week 10 — Mobile App</div>
+          <div class="tl-title">Capacitor 앱 빌드 + 가승보</div>
+          <div class="tl-desc">
+            iOS / Android 앱 빌드, FCM 푸시 알림 연동.
+            가승보 PDF 자동 생성(한문 원문 + 한글 번역), 인쇄소 발주 연동.
+            TestFlight·Google Play 내부 테스트 트랙 배포.
+          </div>
+        </div>
+
+        <div class="tl-week">
+          <div class="tl-num">Week 11 — QA</div>
+          <div class="tl-title">테스트 및 사용성 검증</div>
+          <div class="tl-desc">
+            전체 기능 통합 테스트. 어르신 종친 5명 대상 사용성 테스트 진행.
+            데이터 정합성 최종 검증. 위원회 운영 매뉴얼 작성.
+          </div>
+        </div>
+
+        <div class="tl-week milestone">
+          <div class="tl-num">Week 12 — Launch</div>
+          <div class="tl-title">정식 출시 + 인수 인계</div>
+          <div class="tl-desc">
+            프로덕션 배포(Vercel + Supabase). 앱스토어 정식 심사 제출.
+            위원회 교육 세션 1회. 3개월 무상 유지보수 시작.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════════════════════════════ -->
+<!-- 07. 보장 사항                            -->
+<!-- ═════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-num">05 — 보장 사항</div>
+    <h2 class="section-title">
+      신뢰할 수 있는 <em>품질 보장</em>
+    </h2>
+    <p class="section-lead">
+      결과물의 품질, 데이터의 안전성, 출시 이후의 운영까지 책임집니다.
+    </p>
+
+    <div class="guarantee-grid">
+      <div class="guarantee-card">
+        <div class="g-icon">①</div>
+        <div class="g-title">데이터 100% 보존</div>
+        <div class="g-desc">
+          마이그레이션 전후 통계 수치를 자동 비교 검증합니다.
+          단 1명의 누락도 없음을 보고서로 증빙합니다.
+        </div>
+      </div>
+      <div class="guarantee-card">
+        <div class="g-icon">②</div>
+        <div class="g-title">변경 이력 영구 보존</div>
+        <div class="g-desc">
+          모든 정보 변경은 audit log에 기록됩니다.
+          누가, 언제, 무엇을, 왜 바꿨는지 완전 추적 가능합니다.
+        </div>
+      </div>
+      <div class="guarantee-card">
+        <div class="g-icon">③</div>
+        <div class="g-title">월 1회 자동 백업</div>
+        <div class="g-desc">
+          매월 1회 DB 전체를 자동 백업하여, 백업 파일을 위원회 대표 이메일로 자동 송부합니다.
+          위원회가 직접 보관하므로 벤더 종속 없이 데이터 영구 확보가 가능합니다.
+        </div>
+      </div>
+      <div class="guarantee-card">
+        <div class="g-icon">④</div>
+        <div class="g-title">3개월 무상 유지보수</div>
+        <div class="g-desc">
+          출시 후 3개월간 발생하는 모든 버그를 무상으로 수정합니다.
+          이후 별도 유지보수 계약 협의 가능합니다.
+        </div>
+      </div>
+      <div class="guarantee-card">
+        <div class="g-icon">⑤</div>
+        <div class="g-title">위원회 교육</div>
+        <div class="g-desc">
+          위원회 임원분들 대상 시스템 운영 교육을 진행합니다.
+          운영 매뉴얼 일체 제공합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════ -->
+<!-- CTA                                     -->
+<!-- ═════════════════════════════════════ -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-content">
+      <div class="cta-mark">Next Step</div>
+      <h2 class="cta-title">
+        본 제안서를 검토하여 주셔서 감사합니다.
+      </h2>
+      <p class="cta-desc">
+        수백년의 역사를 견고히 보존하고, 다음 세대로 이어지게 만드는 시스템.
+      </p>
+
+      <div class="cta-contact">
+        <div class="cta-contact-item">
+          <div class="cta-cl">담당자</div>
+          <div class="cta-cv">대표 이강석</div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="cta-cl">이메일</div>
+          <div class="cta-cv">kslee@bizstart.co.kr</div>
+        </div>
+        <div class="cta-contact-item">
+          <div class="cta-cl">전화</div>
+          <div class="cta-cv">031-282-1921</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Bizstart · bizstart.co.kr · 본 제안서는 행주기씨대종중을 위해 작성된 비공개 자료입니다
+</footer>
+
+</body>
+</html>
